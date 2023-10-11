@@ -1,0 +1,145 @@
+    .container {
+        margin-top: 50px;
+    }
+    @media (max-width: 576px) {
+        .container {
+            margin-top: 10px;
+            padding: 0 15px; /* Menambahkan padding pada container pada ukuran layar kecil */
+        }
+    }
+    .card-header {
+        font-size: 1.3rem;
+    }
+    @media (max-width: 576px) {
+        .card-header {
+            font-size: 1.2rem;
+        }
+    }
+    .card {
+        display: flex;
+        background-color: #048dcc65;
+        width: 450px;
+        height: 550px;
+        margin: 0 auto;
+        box-shadow: 0px 6px 8px black;
+        border-radius: 80px 0 0 80px;
+        padding: 7px;
+        opacity: 0;
+        animation: fadeIn 1s forwards, borderRadiusAnimation 4s infinite;
+    }
+
+    @keyframes borderRadiusAnimation {
+        0%, 100% {
+            border-radius: 95px 0 95px 0;
+        }
+        50% {
+            border-radius: 0 95px 0 95px;
+        }
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        width: 130px; /* Adjust the size of your logo */
+        height: auto;
+        animation: logoAnimation 2s;
+    }
+    
+    h3 {
+        font-weight: bold; /* Mengatur teks "Login" menjadi tebal (bold) */
+        color: #EEE0C9;
+        font-family: cursive;;
+    }
+    
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes logoAnimation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    #loginText {
+        height: 40px; /* Menentukan tinggi tetap pada teks login */
+        display: inline-block;
+        overflow: hidden;
+        }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .login-link {
+        color: #ffff; /* Warna tautan */
+        text-decoration: none;
+        transition: color 0.3s, border-bottom-color 0.3s;
+        border-bottom: 1px solid transparent; /* Garis bawah awal */
+    }
+
+    .login-link:hover {
+        color: #023349; /* Warna tautan saat dihover */
+    }
+
+    .btn-login {
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none; /* Menghilangkan border */
+    border-radius: 50px;
+    }
+
+    .btn-login:hover {
+    background-color: #EEE0C9; /* Warna latar belakang saat hover */
+    color: #fff; /* Warna teks saat hover */
+    }
+
+    .form-group {
+    position: relative;
+    margin-bottom: 25px; /* Tambahkan margin bottom untuk memberikan jarak antara dua form-group */
+    }
+
+    .form-login {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    border-radius: 0;
+    padding: 10px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    }
+
+    .form-login:focus {
+    outline: none;
+    border-color: #EEE0C9;
+    background: transparent;
+    }
+
+    .input-label {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    pointer-events: none;
+    transition: 0.3s ease all;
+    color: #EEE0C9;
+    }
+
+    .form-login:focus + .input-label,
+    .form-login:not(:placeholder-shown) + .input-label {
+    top: -15px;
+    font-size: 15px;
+    color: #EEE0C9;
+    }
