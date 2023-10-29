@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Postingan;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class PostinganController extends Controller
@@ -17,9 +18,15 @@ class PostinganController extends Controller
         if ($user && $user->role === 'admin') {
             // Tindakan yang hanya dapat diakses oleh admin
             $postingan = Postingan::all();
-            return view('postingan.index', compact('postingan', 'firstname', 'lastname', 'user'));
+            $jumlahBeli = [];
+    
+            foreach ($postingan as $item) {
+                $jumlahBeli[$item->id] = $item->products->sum('jumlah_beli');
+            }
+    
+            return view('postingan.index', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user'));
         } else {
-            // Tindakan ini hanya dapat diakses oleh nonadmin
+            // Tindakan ini hanya dapat diakses oleh non-admin
             return redirect()->route('home')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
         }
     }
@@ -43,32 +50,32 @@ class PostinganController extends Controller
     {
         $request->validate([
             'nama_menu' => 'required',
-            'harga' => 'required|regex:/^\d+(\.\d{1,4})?$/',
+            'harga' => 'required|regex:/^\d+(\.\d{1,4})?/',
             'deskripsi' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Aturan validasi untuk gambar
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $image = $request->file('image');
-        
+    
         // Berikan nama unik untuk gambar
         $imageName = time() . '.' . $image->getClientOriginalExtension();
     
-        // Simpan gambar ke direktori yang diinginkan
-        $image->move(public_path('storage/images'), $imageName);
+        // Simpan gambar ke direktori yang diinginkan di penyimpanan
+        $image->storeAs('images', $imageName);
     
         // Simpan data postingan ke basis data
         $postingan = new Postingan([
             'nama_menu' => $request->get('nama_menu'),
-            'harga' => $request->get('harga'), // Simpan harga dalam tipe data desimal
+            'harga' => $request->get('harga'),
             'deskripsi' => $request->get('deskripsi'),
-            'image' => $imageName, // Simpan nama gambar dalam basis data
+            'image' => 'storage/images/' . $imageName,
         ]);
     
         $postingan->save();
     
         return redirect()->route('postingan.index')
             ->with('success', 'Postingan berhasil ditambahkan');
-    }    
+    }
 
     public function show($id, Request $request)
     {
@@ -76,9 +83,13 @@ class PostinganController extends Controller
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('postingan.detail', compact('postingan', 'firstname', 'lastname', 'user'));
-    }
-
+        
+        // Ambil jumlah beli dari semua produk yang terkait dengan postingan
+        $jumlahBeli = $postingan->products->sum('jumlah_beli');
+        
+        return view('postingan.detail', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user'));
+    } 
+     
     public function edit($id, Request $request)
     {
         $postingan = Postingan::find($id);

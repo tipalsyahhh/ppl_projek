@@ -9,7 +9,7 @@ welcome
 @endsection
 
 @section('tabel')
-    Pilih Menu Kesukaan Mu
+    Pilih Destinasi Wisata anda
 @endsection
 
 @push('style')
@@ -69,6 +69,21 @@ welcome
             order: -1;
         }
 
+        .product-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3366FF; /* Warna latar belakang tautan */
+            color: #fff; /* Warna teks tautan */
+            border-radius: 5px;
+            text-decoration: none; /* Hilangkan garis bawah default pada tautan */
+            transition: background-color 0.3s ease; /* Efek transisi saat dihover */
+        }
+
+        .product-link:hover {
+            background-color: #ffff; /* Warna latar belakang saat dihover */
+            border: 2px solid #3366FF;
+        }
+
         /* Responsive styles for small screens */
         @media (max-width: 768px) {
             .product-card {
@@ -106,9 +121,12 @@ welcome
         <h1>SELAMAT DATANG</h1>
     @endif <!-- tambahkan tag penutup if -->
 
-    <div class="product-card">
+    <div id="noResultsMessage" style="display: none; color: blue; font-weight: bold;">
+        Pencarian tidak ditemukan
+    </div>
+
+<div class="product-card">
     @forelse ($postingan as $post)
-        <a href="{{ route('detailProduct', ['id' => $post->id]) }}" class="product-link">Lihat Detail Produk</a>
             <div class="product-item">
                 <div class="product-image">
                     <img src="{{ asset('' . $post->image) }}" alt="Gambar Postingan">
@@ -117,6 +135,7 @@ welcome
                     <div class="menu-name">
                         <p>{{ $post->nama_menu }}</p>
                         <p><span>Rp {{ $post->harga }}</span></p>
+                        <a href="{{ route('detailProduct', ['id' => $post->id]) }}" class="product-link">Lihat Detail</a>
                     </div>
                 </div>
             </div>
@@ -126,6 +145,40 @@ welcome
             <h2>Data tidak ada</h2>
         </div>
     @endforelse
+    <script>
+        // Ambil elemen input pencarian
+        const searchMenuInput = document.getElementById('searchMenu');
+
+        // Ambil elemen untuk menampilkan pesan "Pencarian tidak ditemukan"
+        const noResultsMessage = document.getElementById('noResultsMessage');
+
+        // Tambahkan event listener untuk input pencarian
+        searchMenuInput.addEventListener('input', function () {
+            const keyword = searchMenuInput.value.toLowerCase();
+            const productItems = document.querySelectorAll('.product-item');
+            let resultsFound = false; // Variabel untuk melacak apakah ada hasil pencarian
+
+            // Loop melalui semua item produk
+            productItems.forEach(function (item) {
+                const menuName = item.querySelector('.menu-name p').textContent.toLowerCase();
+
+                // Periksa apakah nama menu mengandung kata kunci
+                if (menuName.includes(keyword)) {
+                    item.style.display = 'block'; // Tampilkan item jika cocok
+                    resultsFound = true;
+                } else {
+                    item.style.display = 'none'; // Sembunyikan item jika tidak cocok
+                }
+            });
+
+            // Tampilkan pesan "Pencarian tidak ditemukan" jika tidak ada hasil
+            if (!resultsFound) {
+                noResultsMessage.style.display = 'block';
+            } else {
+                noResultsMessage.style.display = 'none';
+            }
+        });
+    </script>
 </div>
 
 @endsection

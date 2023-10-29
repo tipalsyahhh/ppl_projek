@@ -13,8 +13,8 @@ class Postingan extends Model
     public $timestamps = false;
     protected $fillable = ['nama_menu', 'harga', 'deskripsi', 'image', 'jumlah_pesan'];
 
-    public function jumlah()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'jumlah_beli', 'id');
+        return $this->hasMany(Product::class, 'menu_id', 'id');
     }
 }

@@ -11,7 +11,7 @@ class Product extends Model
     protected $table = 'product';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['menu_id', 'user_id', 'alamat_id', 'jumlah_beli'];
+    protected $fillable = ['menu_id', 'user_id', 'alamat_id', 'jumlah_beli', 'created_at', 'is_new'];
 
     public function login()
     {

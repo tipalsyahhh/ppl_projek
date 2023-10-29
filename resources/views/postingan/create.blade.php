@@ -10,7 +10,7 @@
 <form method="post" action="{{ route('postingan.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-        <label>Nama Menu</label>
+        <label>Nama</label>
         <input type="text" name="nama_menu" value="{{ old('nama_menu') }}" class="form-control">
     </div>
 

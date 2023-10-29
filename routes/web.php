@@ -9,6 +9,11 @@ use App\Http\Controllers\FotoProfileController;
 use App\Http\Controllers\DataAkunController;
 use App\Http\Controllers\PostinganController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\LikesController;
+use App\Http\Controllers\ExcelExportController;
+use App\Exports\PostExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Middleware\isLogin;
 
 /*
@@ -27,11 +32,11 @@ use App\Http\Middleware\isLogin;
 // });
 
 Route::get('/', function () {
-    return view('login');
+    return view('home');
 });
-Route::view('/home', 'home')->name('home')->Middleware('isLogin');
+Route::view('/home', 'home')->name('home');
 
-Route::get('/from_input', [PagesController::class, 'FromInput'])->name('from_input')->Middleware('isLogin');
+Route::get('/from_input', [PagesController::class, 'FromInput'])->name('from_input');
 Route::match(['get', 'post'], '/welcome', [PagesController::class, 'welcome'])->name('pages.welcome')->middleware('isLogin');
 
 Route::get('/datatable', function () {
@@ -46,7 +51,8 @@ Route::group([], function () {
     Route::get('/data-akun', [DataAkunController::class, 'index'])->name('dataAkun.index')->middleware('isLogin');
     Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index')->middleware('isLogin');
     Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('isLogin');
-
+    Route::get('/statuses', [StatusController::class, 'index'])->name('statuses.index')->middleware('isLogin');
+    Route::get('/like', [LikesController::class, 'index'])->name('like.status')->middleware('isLogin');
 });
 
 // route login
@@ -101,3 +107,23 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::post('cek-order/{product}', [ProductController::class, 'cekOrder']);
+
+//rute status
+Route::get('/statuses/create', [StatusController::class, 'create'])->name('statuses.create');
+Route::post('/statuses', [StatusController::class, 'store'])->name('statuses.store');
+Route::get('/statuses/{status}', [StatusController::class, 'show'])->name('statuses.show');
+Route::get('/statuses/{status}/edit', [StatusController::class, 'edit'])->name('statuses.edit');
+Route::put('/statuses/{id}', [StatusController::class, 'update'])->name('statuses.update');
+Route::delete('/statuses/{status}', [StatusController::class, 'destroy'])->name('statuses.destroy');
+Route::post('/commented-statuses/{status}', [StatusController::class, 'addComment'])->name('commented-statuses');
+
+
+//rute like
+Route::post('/add-like/{status_id}', [LikesController::class, 'addLike'])->name('like.add');
+Route::post('/add-comment/{status_id}', [LikesController::class, 'addComment'])->name('comment.add');
+Route::get('/status/{status_id}/comments', [LikesController::class, 'showComments'])->name('like.comments');
+Route::get('/status/{status_id}', [LikesController::class, 'show'])->name('likes.show');
+
+//rute excel
+Route::get('/export', [ExcelExportController::class, 'export'])->name('export');

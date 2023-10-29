@@ -53,6 +53,9 @@
                         <div class="card-body">
                             @yield('content')
                         </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
                     </div>
                 </div>
             <!-- End of Main Content -->
