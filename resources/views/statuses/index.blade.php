@@ -1,5 +1,10 @@
 @extends('layout.master')
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 @section('judul')
     Daftar Status
 @endsection
@@ -8,6 +13,10 @@
     Data Status
 @endsection
 
+<<<<<<< HEAD
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 @push('style')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
@@ -17,6 +26,10 @@
             width: 100px;
             height: 50px;
         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
         .button-postingan {
             display: flex;
@@ -26,17 +39,33 @@
         .button-delete-postingan {
             margin-left: 10px;
         }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     </style>
 @endpush
 
 @section('content')
     <a class="btn btn-primary mb-3" href="{{ route('statuses.create') }}"><i class="bi bi-plus"></i> Tambah Status</a>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     @if (session('success'))
         <div id="success-alert" class="alert alert-primary">
             {{ session('success') }}
         </div>
     @endif
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
     <div class="card-body">
         <div class="table-responsive">
@@ -66,8 +95,13 @@
                                     alt="Status Image"></td>
                             <td>
                                 <div class="button-postingan">
+<<<<<<< HEAD
                                     <a href="{{ route('statuses.edit', ['status' => $status]) }}"
                                         class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></a>
+=======
+                                    <button class="btn btn-warning btn-sm" onclick="window.location='{{ route('statuses.edit', ['status' => $status]) }}'">
+                                        <i class="bi bi-pencil"></i></button>
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
                                     <div class="button-delete-postingan">
                                     <form method="POST" action="{{ route('statuses.destroy', $status->id) }}"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus status ini?')">
@@ -90,16 +124,75 @@
             </table>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+=======
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">User</th>
+                <th scope="col">Caption</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse ($statuses as $status)
+            <tr>
+                <td>{{ $status->id }}</td>
+                <td>
+                    @if ($status->user)
+                        {{ $status->user->user }}
+                    @else
+                        User Tidak Ditemukan
+                    @endif
+                </td>
+                <td>{{ $status->caption }}</td>
+                <td><img class="profile-image" src="{{ asset('' . $status->image) }}" alt="Status Image"></td>
+                <td>
+                    <a href="{{ route('statuses.edit', ['status' => $status]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
+                    <form action="{{ route('statuses.destroy', ['status' => $status]) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary btn-sm btn-delete" data-id="{{ $status->id }}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5"><h2>Data tidak ada</h2></td>
+            </tr>
+        @endforelse
+        </tbody>
+    </table>
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 @endsection
 
 @push('script')
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         $(document).ready(function () {
             $('#dataTable').DataTable();
 
             const deleteButtons = document.querySelectorAll('.button-delete-postingan button');
+<<<<<<< HEAD
+=======
+=======
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -118,7 +211,15 @@
                             const form = document.createElement('form');
                             form.method = 'POST';
                             form.style.display = 'none';
+<<<<<<< HEAD
                             form.action = '/statuses/' + itemId;
+=======
+<<<<<<< HEAD
+                            form.action = '/statuses/' + itemId;
+=======
+                            form.action = form.action = '/statuses/' + itemId;
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
                             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                             const csrfInput = document.createElement('input');
                             csrfInput.name = '_token';
@@ -144,7 +245,15 @@
         // Cek apakah elemen pesan ada
         if (successAlert) {
             // Setelah 10 detik, sembunyikan elemen pesan
+<<<<<<< HEAD
             setTimeout(function () {
+=======
+<<<<<<< HEAD
+            setTimeout(function () {
+=======
+            setTimeout(function() {
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
                 successAlert.style.display = 'none';
             }, 10000); // 10 detik
         }

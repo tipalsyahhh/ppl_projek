@@ -12,9 +12,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\ExcelExportController;
+<<<<<<< HEAD
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\EvenController;
+=======
+<<<<<<< HEAD
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\EvenController;
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 use App\Exports\PostExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Middleware\isLogin;
@@ -56,8 +65,16 @@ Route::group([], function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('isLogin');
     Route::get('/statuses', [StatusController::class, 'index'])->name('statuses.index')->middleware('isLogin');
     Route::get('/like', [LikesController::class, 'index'])->name('like.status')->middleware('isLogin');
+<<<<<<< HEAD
     Route::get('/follow', [FollowController::class, 'index'])->name('follow.index')->middleware('isLogin');
     Route::get('/even', [EvenController::class, 'index'])->name('even.index')->middleware('isLogin');
+=======
+<<<<<<< HEAD
+    Route::get('/follow', [FollowController::class, 'index'])->name('follow.index')->middleware('isLogin');
+    Route::get('/even', [EvenController::class, 'index'])->name('even.index')->middleware('isLogin');
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 });
 
 // route login
@@ -112,9 +129,19 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+<<<<<<< HEAD
 Route::get('/tata-tertib', [ProductController::class, 'tataTertib'])->name('products.tata_tertib');
 Route::post('/approve-order', [ProductController::class, 'approveOrder'])->name('approve.order');
 Route::post('/reject-order', [ProductController::class, 'rejectOrder'])->name('products.rejectOrder');
+=======
+<<<<<<< HEAD
+Route::get('/tata-tertib', [ProductController::class, 'tataTertib'])->name('products.tata_tertib');
+Route::post('/approve-order', [ProductController::class, 'approveOrder'])->name('approve.order');
+Route::post('/reject-order', [ProductController::class, 'rejectOrder'])->name('products.rejectOrder');
+=======
+Route::post('cek-order/{product}', [ProductController::class, 'cekOrder']);
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
 //rute status
 Route::get('/statuses/create', [StatusController::class, 'create'])->name('statuses.create');
@@ -122,10 +149,21 @@ Route::post('/statuses', [StatusController::class, 'store'])->name('statuses.sto
 Route::get('/statuses/{status}', [StatusController::class, 'show'])->name('statuses.show');
 Route::get('/statuses/{status}/edit', [StatusController::class, 'edit'])->name('statuses.edit');
 Route::put('/statuses/{id}', [StatusController::class, 'update'])->name('statuses.update');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 Route::delete('/statuses/{id}', [StatusController::class, 'destroy'])->name('statuses.destroy');
 Route::delete('/statuses/delete-profile/{id}', [StatusController::class, 'deleteProfile'])->name('statuses.deleteProfile');
 Route::post('/commented-statuses/{status}', [StatusController::class, 'addComment'])->name('commented-statuses');
 Route::get('/status/count', [StatusController::class, 'getStatusCountByUser'])->name('status.count');
+<<<<<<< HEAD
+=======
+=======
+Route::delete('/statuses/{status}', [StatusController::class, 'destroy'])->name('statuses.destroy');
+Route::post('/commented-statuses/{status}', [StatusController::class, 'addComment'])->name('commented-statuses');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
 
 //rute like
@@ -135,6 +173,10 @@ Route::get('/status/{status_id}/comments', [LikesController::class, 'showComment
 Route::get('/status/{status_id}', [LikesController::class, 'show'])->name('likes.show');
 
 //rute excel
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 Route::get('/export', [ExcelExportController::class, 'export'])->name('export');
 
 //rute history
@@ -142,7 +184,10 @@ Route::get('/history', [HistoryController::class, 'index'])->name('history.index
 Route::get('/history/{id}', [HistoryController::class, 'show'])->name('history.show');
 
 //rute even
+<<<<<<< HEAD
 //rute even
+=======
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 Route::get('/even/create', [EvenController::class, 'create'])->name('even.create');
 
 // Menyimpan data even baru
@@ -166,4 +211,11 @@ Route::post('/follow/{userId}', [FollowController::class, 'follow'])->name('foll
 Route::post('/unfollow/{userId}', [FollowController::class, 'unfollow'])->name('follow.unfollow');
 Route::get('/followers/{userId}', [FollowController::class, 'followers'])->name('follow.followers');
 Route::get('/following/{userId}', [FollowController::class, 'following'])->name('follow.following');
+<<<<<<< HEAD
 Route::get('/follow/{userId}', [FollowController::class, 'showProfile'])->name('follow.profile');
+=======
+Route::get('/follow/{userId}', [FollowController::class, 'showProfile'])->name('follow.profile');
+=======
+Route::get('/export', [ExcelExportController::class, 'export'])->name('export');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49

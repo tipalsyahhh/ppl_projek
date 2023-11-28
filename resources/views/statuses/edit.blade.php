@@ -29,6 +29,13 @@
     <div class="form-group">
         <label>Gambar</label>
         <input type="file" name="image" class="form-control">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <img src="{{ asset(''.$status->image) }}" alt="Even Image" class="img-thumbnail mt-2" width="200">
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     </div>
 
     @error('image')

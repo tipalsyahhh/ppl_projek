@@ -10,6 +10,10 @@
         </div>
     </a>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto" id="accordionSidebar">
         <!-- Divider -->
@@ -44,8 +48,13 @@
                 <i class="bi bi-calendar-event" style="color: white; font-size: 1.4em;"></i>
             </a>
         </li>
+<<<<<<< HEAD
         
         <li class="nav-item dropdown no-arrow mx-1">
+=======
+
+        <li class="nav-item dropdown no-arrow">
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw" style="color: white; font-size: 1.2em;"></i>
@@ -81,6 +90,7 @@
                 </a>
                 @endif
                 @endforeach
+<<<<<<< HEAD
 
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
             </div>
@@ -94,6 +104,38 @@
                 <i class="bi bi-search" style="color: white;"></i>
             </a>
 
+=======
+=======
+                    <!-- Search all -->
+                    @if(request()->route()->getName() === 'pages.welcome')
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" id="searchMenu" placeholder="Cari Yang Anda Inginkan...?"
+                                    aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown no-arrow mx-1">
+            @if (request()->route()->getName() === 'pages.welcome')
+            <!-- Tambahkan tombol dropdown untuk tampilan filter dan form pencarian -->
+            <a class="nav-link dropdown-toggle" href="#" id="filterDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-search" style="color: white;"></i>
+            </a>
+
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
             <!-- Dropdown - Filter & Search -->
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown" style="width: 100vw">
                 <div class="container" id="filterAndSearch">
@@ -109,6 +151,113 @@
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
+<<<<<<< HEAD
+=======
+=======
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+    aria-labelledby="alertsDropdown">
+    <h6 class="dropdown-header">
+        Alerts Center
+    </h6>
+    <div id="notifications-container">
+        <!-- Notifikasi akan ditampilkan di sini -->
+    </div>
+</div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_1.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_2.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_3.svg')}}"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $user->user }}</span>
+                                <img class="img-profile rounded-circle"
+                                src="{{ $user->profileImage ? asset('storage/' . $user->profileImage->image_path) : asset('storage/default_profile.png') }}">
+                            </a>
+                            @if ($user->role !== 'admin')
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="{{ route('dataAkun.index') }}">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
                                 </div>
                             </form>
                         </div>

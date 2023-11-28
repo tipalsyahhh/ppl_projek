@@ -36,9 +36,35 @@
 
     <!-- Main Content -->
 
+<<<<<<< HEAD
     <!-- Topbar -->
     @include('partial.nav')
     <!-- End of Topbar -->
+=======
+<<<<<<< HEAD
+    <!-- Topbar -->
+    @include('partial.nav')
+    <!-- End of Topbar -->
+=======
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">@yield('judul')</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">@yield('tabel')</h6>
+                        </div>
+                        <div class="card-body">
+                            @yield('content')
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+            <!-- End of Main Content -->
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
     <!-- Begin Page Content -->
     @if ($user && $user->role === 'admin')
@@ -59,6 +85,7 @@
                 <a class="dropdown-item" href="{{ route('even.index') }}" class="nav-link">Even</a>
             </div>
         </div>
+<<<<<<< HEAD
     </div>
     @endif
     <!-- Page Heading -->
@@ -92,6 +119,41 @@
             </div>
         </footer>
     </div>
+=======
+    </div>
+    @endif
+    <!-- Page Heading -->
+    <h1 class="h3 mt-2 text-gray-800">@yield('judul')</h1>
+    <h6 class="m-0 font-weight-bold text-primary">@yield('tabel')</h6>
+    <div class="card-body" style="padding-bottom: 4rem; padding-top: 5rem;">
+        @yield('content')
+    </div>
+    <div class="fouter-user">
+        <footer>
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <div class="isi-menu">
+                        <!-- Divider -->
+
+                        <!-- Nav Items -->
+                        <a class="isi-icon" href="{{ route('like.status') }}">
+                            <i class="bi bi-house-door" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('pages.welcome') }}">
+                            <i class="bi bi-shop-window" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('statuses.create') }}">
+                            <i class="bi bi-plus-square" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('follow.index') }}">
+                            <i class="bi bi-people-fill" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     <!-- End of Main Content -->
     <!-- End of Footer -->
     <!-- End of Content Wrapper -->

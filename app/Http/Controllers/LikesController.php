@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Likes;
 use App\Models\Login;
 use App\Models\Status;
+<<<<<<< HEAD
 use App\Models\Product;
+=======
+<<<<<<< HEAD
+use App\Models\Product;
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 use Illuminate\Support\Facades\Auth;
 
 class LikesController extends Controller
@@ -16,7 +23,14 @@ class LikesController extends Controller
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
+<<<<<<< HEAD
         $products = Product::all();
+=======
+<<<<<<< HEAD
+        $products = Product::all();
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     
         // Dapatkan semua status yang sesuai dengan pengguna
         $statuses = Status::all(); // Ubah query sesuai kebutuhan
@@ -33,7 +47,15 @@ class LikesController extends Controller
             'statuses' => $statuses,
             'likedStatuses' => $likedStatuses,
             'commentedStatuses' => $commentedStatuses,
+<<<<<<< HEAD
         ], compact('firstname', 'lastname', 'user', 'products'));
+=======
+<<<<<<< HEAD
+        ], compact('firstname', 'lastname', 'user', 'products'));
+=======
+        ], compact('firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }
     
     public function addLike(Request $request, $status_id)
@@ -91,12 +113,27 @@ class LikesController extends Controller
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         $status = Status::findOrFail($status_id);
+<<<<<<< HEAD
         $products = Product::all();
+=======
+<<<<<<< HEAD
+        $products = Product::all();
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     
         // Mengambil semua komentar terkait status yang memiliki status_id sesuai dengan $status_id
         $likes = Likes::where('status_id', $status_id)->get();
     
+<<<<<<< HEAD
         return view('like.comments', compact('likes', 'user', 'status', 'firstname', 'lastname', 'products'));
+=======
+<<<<<<< HEAD
+        return view('like.comments', compact('likes', 'user', 'status', 'firstname', 'lastname', 'products'));
+=======
+        return view('like.comments', compact('likes', 'user', 'status', 'firstname', 'lastname'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }
 
     public function show($statusId)
