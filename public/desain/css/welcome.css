@@ -1,0 +1,177 @@
+/* Container utama */
+
+.modal-content {
+    margin-bottom: 20px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 100%;
+    /* Lebar sesuai kebutuhan Anda */
+    height: auto;
+    /* Tinggi sesuai kebutuhan Anda */
+    cursor: pointer;
+    overflow: hidden;
+    position: center;
+}
+
+#profile-modal img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Container untuk teks di dalam card */
+.card-text-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Teks dalam card */
+.card-text {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.caption p {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    color: #080808;
+}
+
+.produk-isi {
+    display: flex;
+    position: absolute;
+    right: 10px;
+}
+
+.produk-isi p{
+    color: #080808;
+}
+
+.harga-masuk {
+    color: #a30606;
+    font-weight: bold;
+}
+
+.button-user-like-comen {
+    display: flex;
+    gap: 10px;
+    /* Sesuaikan jarak antara kedua elemen */
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button-user-like-comen form {
+    margin: 0;
+    /* Hapus margin bawaan dari form */
+}
+
+.button-user-like-comen button {
+    border: none;
+    /* Hapus border pada tombol */
+    background: none;
+    /* Hapus latar belakang tombol */
+    cursor: pointer;
+}
+
+.button-user-like-comen a {
+    text-decoration: none;
+    /* Hapus dekorasi teks pada tautan */
+    color: #fff;
+    /* Gunakan warna teks default */
+}
+
+.button-user-like-comen a:hover {
+    text-decoration: none;
+    /* Hapus efek hover */
+    color: #080808;
+}
+
+/* Media query untuk layar kecil (contoh: ukuran maksimum 768px) */
+@media (max-width: 768px) {
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info h5 {
+        font-size: 16px;
+        color: #080808;
+    }
+
+    .produk-isi {
+        display: flex;
+        font-size: 14px;
+        position: absolute;
+        right: auto;
+    }
+
+    .harga-masuk {
+        margin-top: 28px;
+    }
+
+    /* Container untuk teks di dalam card diubah untuk ukuran layar HP */
+    .card-text-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .dalam-postingan {
+        margin: 0 auto;
+        /* Menempatkan tampilan di tengah */
+        width: 90%;
+        gap: 5px;
+    }
+
+    .postingan {
+        width: 100%;
+        /* Lebar elemen menjadi 100% pada ukuran layar kecil */
+        margin-left: 12px;
+        /* Hapus margin kiri pada ukuran layar kecil */
+        margin-right: -5px;
+        height: 80px;
+        max-width: calc(35% - 20px);
+        /* Lebar maksimum elemen */
+        margin-bottom: 10px;
+    }
+
+    .button-modal-1 {
+        display: inline-block;
+        font-size: 15px;
+        text-decoration: none;
+        background-color: #ffc10700;
+        /* Warna latar belakang */
+        color: #fff;
+        /* Warna teks */
+        border-radius: 8px;
+        /* Bentuk border */
+        cursor: pointer;
+    }
+
+    .btn-close-1 {
+        display: inline-block;
+        font-size: 15px;
+        text-decoration: none;
+        color: #fff;
+        /* Warna teks */
+        cursor: pointer;
+        background-color: transparent;
+        /* Hapus latar belakang tombol */
+        border: none;
+        /* Hapus border tombol */
+    }
+}

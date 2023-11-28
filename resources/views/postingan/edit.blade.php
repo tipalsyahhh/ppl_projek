@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 @section('content')
-<form method="post" action="{{ route('postingan.update', ['id' => $postingan->id]) }}" enctype="multipart/form-data">
+<form id="update-form" method="post" action="{{ route('postingan.update', ['id' => $postingan->id]) }}" enctype="multipart/form-data">
     @if(session('success'))
     <div id="success-alert" class="alert alert-warning">
         {{ session('success') }}
@@ -44,6 +44,16 @@
     @enderror
 
     <div class="form-group">
+        <label>Jenis</label>
+        <input type="text" name="jenis" value="{{ $postingan->jenis }}" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Kapasitas</label>
+        <input type="text" name="kapasitas" value="{{ $postingan->kapasitas }}" class="form-control">
+    </div>
+
+    <div class="form-group">
         <label>Gambar</label>
         <input type="file" name="image" class="form-control">
     </div>
@@ -52,7 +62,7 @@
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 
-    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Simpan</button>
+    <button type="button" id="btn-update" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

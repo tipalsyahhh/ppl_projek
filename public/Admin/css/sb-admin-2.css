@@ -159,13 +159,13 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #fff;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -546,7 +546,6 @@ pre code {
 }
 
 .container,
-.container-fluid,
 .container-sm,
 .container-md,
 .container-lg,
@@ -3004,7 +3003,6 @@ input[type="button"].btn-block {
   display: inline-block;
   margin-left: 0.255em;
   vertical-align: 0.255em;
-  content: "";
   border-top: 0.3em solid;
   border-right: 0.3em solid transparent;
   border-bottom: 0;
@@ -3017,6 +3015,7 @@ input[type="button"].btn-block {
 
 .dropdown-menu {
   position: absolute;
+  width: 100%;
   top: 100%;
   left: 0;
   z-index: 1000;
@@ -3024,7 +3023,7 @@ input[type="button"].btn-block {
   float: left;
   min-width: 10rem;
   padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
+  margin: 0 0 2rem 0;
   font-size: 0.85rem;
   color: #858796;
   text-align: left;
@@ -4025,7 +4024,7 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
+   padding: 0.5rem 0.5rem;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -4104,12 +4103,14 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .navbar .container,
@@ -4493,8 +4494,7 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid #e3e6f0;
-  border-radius: 0.35rem;
+  border: none;
 }
 
 .card > hr {
@@ -4770,7 +4770,6 @@ input[type="button"].btn-block {
 }
 
 .page-link:hover {
-  z-index: 2;
   color: #224abe;
   text-decoration: none;
   background-color: #eaecf4;
@@ -4795,7 +4794,6 @@ input[type="button"].btn-block {
 }
 
 .page-item.active .page-link {
-  z-index: 3;
   color: #fff;
   background-color: #4e73df;
   border-color: #4e73df;
@@ -7716,7 +7714,7 @@ button.bg-dark:focus {
 
 .ml-2,
 .mx-2 {
-  margin-left: 0.5rem !important;
+  margin-left: 1.5rem !important;
 }
 
 .m-3 {
@@ -9808,7 +9806,7 @@ a:focus {
   flex: 1 0 auto;
 }
 
-.container,
+
 .container-fluid,
 .container-sm,
 .container-md,
@@ -9816,6 +9814,8 @@ a:focus {
 .container-xl {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4rem;
 }
 
 .scroll-to-top {
@@ -10206,7 +10206,7 @@ a:focus {
   height: 4.375rem;
   display: flex;
   align-items: center;
-  padding: 0 0.75rem;
+  padding: 0 0.4rem;
 }
 
 .topbar .nav-item .nav-link:focus {
@@ -11274,7 +11274,7 @@ footer.sticky-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #ffffff; /* Ganti dengan warna background yang sesuai */
+  background-color: #EAE0DA; /* Ganti dengan warna background yang sesuai */
 }
 
 footer.sticky-footer .copyright {

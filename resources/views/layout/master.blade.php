@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ujian Akhir Semester</title>
+    <title>Projek Perangkat Lunak</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('admin/css/sb-admin-2.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('desain/css/fouter.css')}}">
 
     <!-- Custom styles for this page -->
     <link href="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -26,51 +27,75 @@
 <body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
-        @include('partial.sidebar')
-        <!-- Sidebar -->
 
-        <!-- End of Sidebar -->
+    <!-- Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- End of Sidebar -->
 
-            <!-- Main Content -->
-            <div id="content">
+    <!-- Content Wrapper -->
 
-                <!-- Topbar -->
-                @include('partial.nav')
-                <!-- End of Topbar -->
+    <!-- Main Content -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">@yield('judul')</h1>
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">@yield('tabel')</h6>
-                        </div>
-                        <div class="card-body">
-                            @yield('content')
-                        </div>
-                    </div>
-                </div>
-            <!-- End of Main Content -->
+    <!-- Topbar -->
+    @include('partial.nav')
+    <!-- End of Topbar -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Projek Perangkat Lunak 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+    <!-- Begin Page Content -->
+    @if ($user && $user->role === 'admin')
+    <div class="user-admin">
+        <!-- Admin Section -->
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder" style="color: white; font-size: 1.2em;"></i>
+        </a>
 
+        <div id="collapsePages" class="dropdown-menu dropdown-menu-center shadow animated--grow-in"
+            aria-labelledby="userDropdown">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">&nbsp;&nbsp;Crud Tabel :</h6>
+                <a class="dropdown-item" href="{{ route('postingan.index') }}" class="nav-link">Uploat</a>
+                <a class="dropdown-item" href="{{ route('products.index') }}" class="nav-link">Pesanan</a>
+                <a class="dropdown-item" href="{{ route('statuses.index') }}" class="nav-link">Status</a>
+                <a class="dropdown-item" href="{{ route('even.index') }}" class="nav-link">Even</a>
+            </div>
         </div>
-        <!-- End of Content Wrapper -->
-
     </div>
+    @endif
+    <!-- Page Heading -->
+    <h1 class="h3 mt-2 text-gray-800">@yield('judul')</h1>
+    <h6 class="m-0 font-weight-bold text-primary">@yield('tabel')</h6>
+    <div class="card-body" style="padding-bottom: 4rem; padding-top: 5rem;">
+        @yield('content')
+    </div>
+    <div class="fouter-user">
+        <footer>
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <div class="isi-menu">
+                        <!-- Divider -->
+
+                        <!-- Nav Items -->
+                        <a class="isi-icon" href="{{ route('like.status') }}">
+                            <i class="bi bi-house-door" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('pages.welcome') }}">
+                            <i class="bi bi-shop-window" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('statuses.create') }}">
+                            <i class="bi bi-plus-square" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                        <a class="isi-icon" href="{{ route('follow.index') }}">
+                            <i class="bi bi-people-fill" style="color: black; font-size: 1.2em;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- End of Main Content -->
+    <!-- End of Footer -->
+    <!-- End of Content Wrapper -->
+
 
 
     <!-- Logout Modal-->
@@ -111,8 +136,8 @@
     <script src="{{asset('admin/js/demo/datatables-demo.js')}}"></script>
 
 
-@stack('script')
-@stack('style')
+    @stack('script')
+    @stack('style')
 </body>
 
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Login extends Model implements Authenticatable
 {
@@ -61,7 +62,57 @@ class Login extends Model implements Authenticatable
     }
 
     public function user()
-{
-    return $this->belongsTo(Login::class, 'user_id', 'id');
-}
+    {
+        return $this->belongsTo(Login::class, 'user_id', 'id');
+    }
+
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(Login::class, 'follows', 'user_id', 'following_user_id');
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(Login::class, 'follows', 'following_user_id', 'user_id');
+    }
+
+    protected $appends = ['myFollowers_count', 'myFollowings_count'];
+
+    public function getMyFollowersCountAttribute()
+    {
+        return $this->followers()->count();
+    }
+
+    public function getMyFollowingsCountAttribute()
+    {
+        return $this->following()->count();
+    }
+
+    public function myStatuses()
+    {
+        return $this->hasMany(Status::class, 'user_id', 'id');
+    }
+
+    public function approvedOrdersCount()
+    {
+        return $this->products()->where('status', 'disetujui')->count();
+    }
+
+    // Metode untuk menghitung jumlah produk dengan status 'ditolak'
+    public function rejectedOrdersCount()
+    {
+        return $this->products()->where('status', 'ditolak')->count();
+    }
+
+    // Ganti nama relasi dan model sesuai dengan struktur aplikasi Anda
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
+    }
+
+    // Metode untuk menghitung jumlah pesanan yang belum dibaca
+    public function unreadOrdersCount()
+    {
+        return $this->products()->where('status', 'unread')->count();
+    }
 }

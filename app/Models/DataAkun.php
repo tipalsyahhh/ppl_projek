@@ -11,11 +11,11 @@ class DataAkun extends Model
 
     protected $table = 'profile';
     protected $primaryKey = 'id';
-    protected $fillable = ['nama_depan', 'nama_belakang', 'tanggal_lahir', 'alamat', 'gender', 'user_id'];
+    protected $fillable = ['nama_depan', 'nama_belakang', 'tanggal_lahir', 'alamat', 'gender', 'user_id', 'biodata'];
     public $timestamps = false;
 
     public function user()
-{
+    {
     return $this->belongsTo(Login::class, 'user_id', 'id');
-}
+    }
 }

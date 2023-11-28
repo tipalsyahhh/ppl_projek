@@ -1,0 +1,307 @@
+    .card-body p {
+        margin-bottom: -5px;
+    }
+
+    .caption p {
+        margin-top: 15px;
+        margin-bottom: -5px;
+    }
+
+    .judul-comentar {
+        background-color: #f8f9fc;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .judul-comentar h6 {
+        margin: 0;
+        /* Menghapus margin bawaan untuk menghindari jarak di atas dan bawah */
+    }
+
+    .comment-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .comment-list li {
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .comment-list li strong {
+        font-weight: bold;
+    }
+
+    /* Gaya untuk nama pengguna */
+    .comment-list .comment-user {
+        color: #333;
+    }
+
+    .comment-list .comment-text {
+        color: #666;
+    }
+
+    #add-comment-button {
+        margin-bottom: 10px;
+    }
+
+    #comment-created-at {
+        float: right;
+        margin-top: -20px;
+        margin-right: 10px;
+    }
+
+    .isi-comentar {}
+
+    .comentar-item {
+        /* Menyusun elemen flex secara horizontal */
+        display: flex;
+        margin-bottom: 10px;
+        /* Menambahkan jarak antar item komentar */
+        padding: 10px;
+    }
+
+    .comentar-item img {
+        /* Mengatur ukuran dan bentuk foto profil */
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* Membuat foto profil menjadi lingkaran */
+        margin-right: 10px;
+        /* Memberikan jarak antara foto profil dan comentar-details */
+    }
+
+    .comentar-details {
+        /* Memberikan ruang di sekitar comentar-details */
+        flex: 1;
+        margin-left: 10px;
+    }
+
+    /* Gaya tambahan sesuai kebutuhan Anda */
+    .comment-user {
+        font-weight: bold;
+    }
+
+    .comentar-user {
+        font-size: 12px;
+        position: absolute;
+        right: 10px;
+    }
+
+    .comment-text {
+        color: gray;
+    }
+
+    .garis-comentar {
+        border-bottom: 1px solid #ccc;
+        /* Warna dan lebar garis dapat disesuaikan */
+        margin-bottom: 10px;
+        /* Memberikan jarak di bawah garis */
+    }
+
+    #emoticon-header,
+    #emoticon-container {
+        padding: 10px;
+        margin: 0 auto;
+        /* Menempatkan tampilan di tengah */
+        width: 50%;
+        max-height: 200px;
+        /* Sesuaikan dengan tinggi yang diinginkan */
+    }
+
+    #emoticon-header {
+        background-color: #dddddd;
+        border-radius: 10px 10px 0 0;
+    }
+
+    #emoticon-header p {
+        font-size: 20px;
+        color: #fff;
+    }
+
+    #emoticon-container {
+        background-color: #f8f6f6;
+        overflow-y: auto;
+        /* Menambahkan scroll vertikal jika lebih dari max-height */
+        border-radius: 0 0 10px 10px;
+        margin-bottom: 10px;
+    }
+
+    .isi-emoticon {
+        background-color: transparent;
+        border: none;
+        margin: 5 5 5 11;
+        font-size: 24px;
+        /* Sesuaikan ukuran font sesuai kebutuhan */
+        cursor: pointer;
+    }
+
+    #emoticon-container p {
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+
+    .form-comentar {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .user-info,
+    .form-comentar {
+        height: 40px;
+        /* Sesuaikan dengan tinggi yang diinginkan */
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .img-profile {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    #comment-form {
+        display: flex;
+        align-items: flex-start;
+        margin-left: 10px;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .comen-group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .input-group-icon-comentar {
+        display: flex;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .kirim-comentar,
+    #emoticon-button,
+    #emoticon-button:focus,
+    #emoticon-button:active {
+        border: none;
+        outline: none;
+        background-color: rgba(0, 0, 0, 0);
+        /* Background transparan */
+    }
+
+    @media (max-width: 768px) {
+
+        #emoticon-header,
+        #emoticon-container {
+            padding: 10px;
+            margin: 0 auto;
+            /* Menempatkan tampilan di tengah */
+            width: 90%;
+            max-height: 200px;
+            /* Sesuaikan dengan tinggi yang diinginkan */
+        }
+
+        #emoticon-header {
+            background-color: #dddddd;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #emoticon-header p {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        #emoticon-container {
+            background-color: #f8f6f6;
+            overflow-y: auto;
+            /* Menambahkan scroll vertikal jika lebih dari max-height */
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 10px;
+        }
+
+        .isi-emoticon {
+            background-color: transparent;
+            border: none;
+            margin: 0 0 0 13;
+            font-size: 13px;
+            /* Sesuaikan ukuran font sesuai kebutuhan */
+            cursor: pointer;
+        }
+
+        #emoticon-container p {
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
+
+        .form-comentar {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        .user-info,
+        .form-comentar {
+            height: 40px;
+            /* Sesuaikan dengan tinggi yang diinginkan */
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .img-profile-comentar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: -10;
+        }
+
+        .comen-group {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .comen-group input {
+            font-size: 13px;
+        }
+
+        .input-group-icon-comentar {
+            display: flex;
+            margin-right: -2;
+            ;
+        }
+
+        #comment-form {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        .kirim-comentar,
+        #emoticon-button,
+        #emoticon-button:focus,
+        #emoticon-button:active {
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0);
+            margin-right: -5;
+        }
+    }

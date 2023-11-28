@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataAkun;
+use App\Models\Product;
+use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 
 class DataAkunController extends Controller
@@ -12,10 +14,15 @@ class DataAkunController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $statuses = Status::all();
+        $products = Product::all();
         $firstname = $request->input('first_name');
         $lastname = $request->input('last_name');
         $dataAkun = DataAkun::where('user_id', $user->id)->get();
-        return view('dataAkun.index', compact('dataAkun', 'firstname', 'lastname', 'user'));
+        $userProfile = DataAkun::with('user.profileImage', 'user.followers', 'user.myStatuses')->where('user_id', $user->id)->first();
+        $statusCount = Status::where('user_id', $user->id)->count();
+    
+        return view('dataAkun.index', compact('dataAkun', 'firstname', 'lastname', 'user', 'userProfile', 'products', 'statuses', 'statusCount'));
     }
 
     public function show($dataAkunId)
@@ -30,9 +37,10 @@ class DataAkunController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('dataAkun.create', compact('firstname', 'lastname', 'user'));
+        return view('dataAkun.create', compact('firstname', 'lastname', 'user', 'products'));
     }
 
     // Menyimpan data baru
@@ -44,6 +52,7 @@ class DataAkunController extends Controller
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'alamat' => $request->input('alamat'),
             'gender' => $request->input('gender'),
+            'biodata' => $request->input('biodata'),
             'user_id' => Auth::user()->id, // Gunakan ID pengguna yang telah login
         ]);
     
@@ -57,6 +66,7 @@ class DataAkunController extends Controller
     {
         $dataAkun = DataAkun::where('user_id', $user_id)->first();
     
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         $user = Auth::user();
@@ -65,7 +75,7 @@ class DataAkunController extends Controller
             return redirect()->route('dataAkun.index')->with('error', 'Data Akun tidak ditemukan');
         }
     
-        return view('dataAkun.edit', compact('dataAkun', 'firstname', 'lastname', 'user'));
+        return view('dataAkun.edit', compact('dataAkun', 'firstname', 'lastname', 'user', 'products'));
     }
 
     // Memperbarui data yang diedit
@@ -80,6 +90,7 @@ class DataAkunController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required',
             'gender' => 'required|in:Laki-laki,Perempuan',
+            'biodata' => 'required',
         ]);
     
         // Jika pengguna belum memiliki data akun, buat baru
@@ -93,6 +104,7 @@ class DataAkunController extends Controller
         $dataAkun->tanggal_lahir = $request->input('tanggal_lahir');
         $dataAkun->alamat = $request->input('alamat');
         $dataAkun->gender = $request->input('gender');
+        $dataAkun->biodata = $request->input('biodata');
         $dataAkun->save();
     
         return redirect()->route('dataAkun.index')->with('success', 'Profil berhasil diperbarui');

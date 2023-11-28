@@ -1,0 +1,309 @@
+.card1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.isi-detal {
+    display: flex;
+}
+
+.asu {
+    display: flex;
+    flex-direction: column;
+    /* Mengatur arah kolom */
+    align-items: flex-start;
+    /* Mengatur perataan ke kiri */
+    width: 100%;
+}
+
+.asu h5 {
+    margin-left: 55px;
+    color: #080808;
+}
+
+.card-title {
+    margin: 0;
+    /* Menghilangkan margin bawaan dari h5 */
+}
+
+.detail-icon {
+    display: flex;
+    margin-left: 38px;
+    color: #080808;
+}
+
+.detail-icon p {
+    margin-right: 20px;
+    /* Sesuaikan jarak antara elemen-elemen */
+    position: relative;
+    margin-left: 25px;
+}
+
+.detail-icon p:not(.no-border)::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 1px;
+    background-color: #ccc;
+    /* Warna garis pemisah */
+    position: absolute;
+    top: 0;
+    right: -10px;
+    /* Sesuaikan jarak antara garis dan teks */
+}
+
+.harga {
+    font-size: 25px;
+    background-color: #fafafa;
+    margin-left: 55px;
+    color: #f6c23e;
+    width: 90%;
+    /* Lebar 100% */
+    text-align: center;
+    /* Teks berada di tengah */
+    padding: 10px;
+    font-weight: bold;
+}
+
+.card-title {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.image-detail {
+    width: 45%;
+    height: 400px;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    /* Menambahkan tanda kursor tangan saat diarahkan ke gambar */
+}
+
+.description {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 25px;
+}
+
+.description-isi {
+    font-size: 18px;
+    background-color: #fafafa;
+    color: #080808;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.description p {
+    color: #080808;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.btn-detail a {
+    margin-right: -15px;
+    /* Sesuaikan jarak antara tombol sesuai kebutuhan */
+    text-decoration: none;
+    color: white;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+/* Optional: Jika ingin menambahkan style ikon Bootstrap */
+.btn-detail i {
+    transition: color 0.3s;
+}
+
+.garis {
+    border-top: 1px solid #8f8f8f;
+    /* Warna garis dan ketebalan dapat disesuaikan */
+    width: 90%;
+    /* Lebar garis 100% */
+    margin-left: 55px;
+    margin-top: 55px;
+}
+
+.isi-text {
+    display: flex;
+    align-items: center;
+    margin-left: 55px;
+    margin-top: 15px;
+}
+
+.isi-text img {
+    width: 10%;
+    /* Pastikan gambar tidak melebihi lebar kontainer */
+    height: 40px;
+    /* Sesuaikan jarak antara gambar dan elemen <p> */
+}
+
+.isi-text p {
+    margin: 0;
+    /* Hapus margin bawaan dari elemen <p> */
+    margin-left: 20px;
+}
+
+.garis-hp {
+    display: none;
+}
+
+.isi-text-hp {
+    display: none;
+}
+
+/* Menambahkan media query untuk responsivitas gambar */
+@media (max-width: 768px) {
+
+    .isi-detal {
+        display: flex;
+        margin-left: -30;
+    }
+
+    .asu {
+        display: flex;
+        flex-direction: column;
+        /* Mengatur arah kolom */
+        align-items: flex-start;
+        /* Mengatur perataan ke kiri */
+        width: auto;
+    }
+
+    .asu h5 {
+        margin-left: 13px;
+        color: #080808;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .card-title {
+        margin: 0;
+        /* Menghilangkan margin bawaan dari h5 */
+    }
+
+    .detail-icon {
+        display: flex;
+        margin-left: 8px;
+        color: #080808;
+        width: 15px;
+    }
+
+    .detail-icon p {
+        margin-right: 8px;
+        /* Sesuaikan jarak antara elemen-elemen */
+        position: relative;
+        margin-left: 6px;
+    }
+
+    .detail-icon p:not(.no-border)::after {
+        content: '';
+        display: block;
+        height: 100%;
+        width: 1px;
+        background-color: #ccc;
+        /* Warna garis pemisah */
+        position: absolute;
+        top: 0;
+        right: -10px;
+        /* Sesuaikan jarak antara garis dan teks */
+    }
+
+    .harga {
+        font-size: 14px;
+        background-color: #fafafa;
+        margin-left: 11px;
+        color: #f6c23e;
+        width: 100%;
+        /* Lebar 100% */
+        text-align: center;
+        /* Teks berada di tengah */
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .card-title {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .image-detail {
+        width: 55%;
+        height: 190px;
+        cursor: pointer;
+    }
+
+    .description {
+        width: 100%;
+        font-size: 18px;
+        margin-top: 25px;
+    }
+
+    .description-isi {
+        font-size: 18px;
+        background-color: #fafafa;
+        color: #080808;
+        width: 100%;
+        /* Teks berada di tengah */
+        padding: 10px;
+        /* Sesuaikan padding sesuai kebutuhan */
+    }
+
+    .description p {
+        color: #080808;
+    }
+
+    .btn-detail {
+        margin-left: -30;
+    }
+
+    .btn-detail a {
+        margin-right: -15px;
+        /* Sesuaikan jarak antara tombol sesuai kebutuhan */
+        text-decoration: none;
+        color: white;
+        font-size: 10px;
+        margin-top: 20px;
+        margin-left: 15px;
+    }
+
+    /* Optional: Jika ingin menambahkan style ikon Bootstrap */
+    .btn-detail i {
+        transition: color 0.3s;
+    }
+
+    .garis {
+        display: none;
+    }
+
+    .isi-text {
+        display: none;
+    }
+
+    .isi-text-hp {
+        display: flex;
+        align-items: center;
+    }
+
+    .garis-hp {
+        display: block;
+        border-top: 1px solid #8f8f8f;
+        margin-top: 20px;
+    }
+
+    .isi-text-hp img {
+        width: 10%;
+        height: 30px;
+        margin-right: -5px;
+        margin-top: 10px;
+    }
+
+    .isi-text-hp p {
+        margin: 0;
+        font-size: 12px;
+        margin-left: 8px;
+        margin-top: 10px;
+    }
+}

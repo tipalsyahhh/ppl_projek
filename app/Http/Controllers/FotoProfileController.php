@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Login;
 use App\Models\ProfileImage;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,10 @@ class FotoProfileController extends BaseController
         $fotoProfiles = ProfileImage::all();
         $fotoProfiles = ProfileImage::where('user_id', Auth::user()->id)->get();
         $user = Auth::user();
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('fotoProfile.index', compact('fotoProfiles', 'firstname', 'lastname', 'user'));
+        return view('fotoProfile.index', compact('fotoProfiles', 'firstname', 'lastname', 'user', 'products'));
     }
 
     public function show($username)
@@ -41,23 +43,6 @@ class FotoProfileController extends BaseController
         }
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        ]);
-
-        $imagePath = $request->file('image')->store('', 'local');
-
-        $user = Auth::user();
-
-        if ($user) {
-            $user->profileImage()->updateOrCreate([], ['image_path' => $imagePath]);
-        }
-
-        return redirect()->route('fotoProfile.index')->with('success', 'Gambar profil berhasil diunggah');
-    }
-
     public function showImage($imagePath)
     {
         $path = storage_path('app/public/' . $imagePath);
@@ -70,7 +55,7 @@ class FotoProfileController extends BaseController
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
-        $imagePath = $request->file('image')->store('', 'public');
+        $imagePath = $request->file('image')->store('images', 'local');
     
         $user = Auth::user();
     
@@ -84,13 +69,15 @@ class FotoProfileController extends BaseController
     public function create()
     {
         $user = Auth::user(); 
-        return view('fotoProfile.create', compact('user'));
+        $products = Product::all();
+        return view('fotoProfile.create', compact('user', 'products'));
     }
 
     public function edit($user_id, Request $request)
     {
         $fotoProfile = ProfileImage::where('user_id', $user_id)->first();
     
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         $user = Auth::user();
@@ -98,7 +85,7 @@ class FotoProfileController extends BaseController
             return redirect()->route('foto-profile.index')->with('error', 'Foto Profile tidak ditemukan');
         }
     
-        return view('fotoProfile.edit', compact('fotoProfile', 'firstname', 'lastname', 'user'));
+        return view('fotoProfile.edit', compact('fotoProfile', 'firstname', 'lastname', 'user', 'products'));
     }
 
     public function update(Request $request)

@@ -11,10 +11,10 @@ class Postingan extends Model
     protected $table = 'postingan';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['nama_menu', 'harga', 'deskripsi', 'image', 'jumlah_pesan'];
+    protected $fillable = ['nama_menu', 'harga', 'deskripsi', 'image', 'jumlah_pesan', 'jenis', 'kapasitas'];
 
-    public function jumlah()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'jumlah_beli', 'id');
+        return $this->hasMany(Product::class, 'menu_id', 'id');
     }
 }

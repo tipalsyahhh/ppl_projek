@@ -11,7 +11,7 @@ class Product extends Model
     protected $table = 'product';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['menu_id', 'user_id', 'alamat_id', 'jumlah_beli'];
+    protected $fillable = ['menu_id', 'user_id', 'alamat_id', 'jumlah_beli', 'created_at', 'tanggal_datang', 'total_harga', 'status', 'unread', 'is_new'];
 
     public function login()
     {
@@ -26,6 +26,11 @@ class Product extends Model
     public function alamat()
     {
         return $this->belongsTo(DataAkun::class, 'alamat_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Login::class, 'user_id'); // Sesuaikan dengan nama kolom yang sesuai
     }
 
 }

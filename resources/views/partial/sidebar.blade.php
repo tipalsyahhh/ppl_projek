@@ -14,9 +14,15 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-            <a class="nav-link" href="{{ route('pages.welcome') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+            <a class="nav-link" href="{{ route('like.status') }}">
+                    <i class="bi bi-house-fill"></i>
                     <span>Home</span></a>
+            </li>
+
+            <li class="nav-item active">
+            <a class="nav-link" href="{{ route('pages.welcome') }}">
+                    <i class="fasbi bi-cart4"></i>
+                    <span>Pesan Tiket</span></a>
             </li>
 
             <!-- Divider -->
@@ -80,7 +86,9 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Crud Tabel :</h6>
-                            <a class="collapse-item" href="{{ route('postingan.index') }}" class="nav-link">Cast</a>
+                            <a class="collapse-item" href="{{ route('postingan.index') }}" class="nav-link">Uploat</a>
+                            <a class="collapse-item" href="{{ route('products.index') }}" class="nav-link">Pesanan</a>
+                            <a class="collapse-item" href="{{ route('statuses.index') }}" class="nav-link">Status</a>
                         </div>
                     </div>
                 </li>

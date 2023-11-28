@@ -11,7 +11,7 @@ class RegisterController extends BaseController
 {
     public function showRegistrationForm()
     {
-        return view('register'); // Ganti dengan nama view registrasi yang Anda gunakan
+        return view('login'); // Ganti dengan nama view registrasi yang Anda gunakan
     }
 
     public function register(Request $request)
