@@ -1,5 +1,9 @@
 @extends('layout.master')
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
 <style>
     .create-status {
@@ -166,4 +170,30 @@
         }
     }
 </script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+=======
+@section('content')
+<div class="container">
+    <h1>Create New Status</h1>
+    <form action="{{ route('statuses.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <div class="form-group">
+            <label for="caption">Caption:</label>
+            <textarea name="caption" class="form-control" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" name="image" class="form-control-file" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Status</button>
+    </form>
+</div>
+@endsection
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49

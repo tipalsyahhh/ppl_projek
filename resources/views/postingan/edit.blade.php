@@ -56,6 +56,7 @@
     <div class="form-group">
         <label>Gambar</label>
         <input type="file" name="image" class="form-control">
+        <img src="{{ asset(''.$postingan->image) }}" alt="Even Image" class="img-thumbnail mt-2" width="200">
     </div>
 
     @error('image')

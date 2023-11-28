@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Status;
 use App\Models\Login;
+<<<<<<< HEAD
 use App\Models\Product;
 use App\Models\Likes;
+=======
+<<<<<<< HEAD
+use App\Models\Product;
+use App\Models\Likes;
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,19 +25,43 @@ class StatusController extends Controller
         $statuses = Status::all();
         $statuses = Status::with('user')->get();
         $user = Auth::user();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         return view('statuses.index', compact('statuses', 'firstname', 'lastname', 'user', 'products'));
+<<<<<<< HEAD
+=======
+=======
+        $firstname = $request['first_name'];
+        $lastname = $request['last_name'];
+        return view('statuses.index', compact('statuses', 'firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }    
 
     public function create(Request $request)
     {
         $user = Auth::user();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         return view('statuses.create', compact('firstname', 'lastname', 'user', 'products'));
+<<<<<<< HEAD
+=======
+=======
+        $firstname = $request['first_name'];
+        $lastname = $request['last_name'];
+        return view('statuses.create', compact('firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }
 
     public function store(Request $request)
@@ -59,7 +91,15 @@ class StatusController extends Controller
         ]);
     
         // Redirect ke halaman yang sesuai
+<<<<<<< HEAD
         return redirect()->route('dataAkun.index');
+=======
+<<<<<<< HEAD
+        return redirect()->route('dataAkun.index');
+=======
+        return redirect()->route('statuses.index');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }
     
     public function show(Status $status)
@@ -70,10 +110,22 @@ class StatusController extends Controller
     public function edit(Status $status, Request $request)
     {
         $user = Auth::user();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         return view('statuses.edit', compact('status', 'firstname', 'lastname', 'user', 'products'));
+<<<<<<< HEAD
+=======
+=======
+        $firstname = $request['first_name'];
+        $lastname = $request['last_name'];
+        return view('statuses.edit', compact('status', 'firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     }
 
     public function update(Request $request, $id)
@@ -90,6 +142,10 @@ class StatusController extends Controller
             return redirect()->route('statuses.index')->with('error', 'Status tidak ditemukan');
         }
     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         // Memeriksa peran pengguna
         if (Auth::user()->role == 'admin') {
             $redirectRoute = 'statuses.index';
@@ -97,11 +153,20 @@ class StatusController extends Controller
             $redirectRoute = 'dataAkun.index';
         }
     
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
         if ($request->hasFile('image')) {
             // Hapus file gambar lama jika ada
             if ($status->image) {
                 // Ambil nama file gambar lama
                 $oldImage = pathinfo($status->image)['basename'];
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     
                 // Hapus file gambar lama
                 Storage::disk('public')->delete('images/' . $oldImage);
@@ -116,6 +181,25 @@ class StatusController extends Controller
             // Memindahkan gambar ke direktori yang sesuai
             $image->move(public_path('storage/images'), $imageName);
     
+<<<<<<< HEAD
+=======
+=======
+        
+                // Hapus file gambar lama
+                Storage::disk('public')->delete('images/' . $oldImage);
+            }
+        
+            // Mengambil file gambar yang diunggah
+            $image = $request->file('image');
+        
+            // Membuat nama unik untuk file gambar
+            $imageName = time() . '_' . $image->getClientOriginalName();
+        
+            // Memindahkan gambar ke direktori yang sesuai
+            $image->move(public_path('storage/images'), $imageName);
+        
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
             // Mendapatkan path lengkap gambar
             $imagePath = 'storage/images/' . $imageName;
         } else {
@@ -127,8 +211,19 @@ class StatusController extends Controller
             'image' => $imagePath,
         ]);
     
+<<<<<<< HEAD
         return redirect()->route($redirectRoute)->with('success', 'Status berhasil diperbarui');
     }    
+=======
+<<<<<<< HEAD
+        return redirect()->route($redirectRoute)->with('success', 'Status berhasil diperbarui');
+    }    
+=======
+        return redirect()->route('statuses.index')->with('success', 'Status berhasil diperbarui');
+    }
+    
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 
     public function showComments($status_id, Request $request)
     {
@@ -144,6 +239,10 @@ class StatusController extends Controller
     
         return view('like.comments', compact('likes', 'firstname', 'lastname', 'user', 'status'));
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
     public function destroy($id)
     {
         try {
@@ -180,4 +279,9 @@ class StatusController extends Controller
 
         return view('status.count', compact('statusCount'));
     }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
+>>>>>>> 5a5607c74fac3e2d437f904cadc8ba94bce64f49
 }
