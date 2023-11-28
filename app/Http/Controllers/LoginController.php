@@ -35,9 +35,9 @@ class LoginController extends BaseController
     
             // Periksa peran pengguna
             if ($userModel->role === 'admin') {
-                return redirect()->route('home');
+                return redirect()->route('pages.welcome');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('pages.welcome');
             }
         } else {
             return redirect()->back()->with('error', 'Password salah.');

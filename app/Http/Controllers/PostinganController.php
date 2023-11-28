@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Postingan;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class PostinganController extends Controller
@@ -11,15 +12,22 @@ class PostinganController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
     
         if ($user && $user->role === 'admin') {
             // Tindakan yang hanya dapat diakses oleh admin
             $postingan = Postingan::all();
-            return view('postingan.index', compact('postingan', 'firstname', 'lastname', 'user'));
+            $jumlahBeli = [];
+    
+            foreach ($postingan as $item) {
+                $jumlahBeli[$item->id] = $item->products->sum('jumlah_beli');
+            }
+    
+            return view('postingan.index', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user', 'products'));
         } else {
-            // Tindakan ini hanya dapat diakses oleh nonadmin
+            // Tindakan ini hanya dapat diakses oleh non-admin
             return redirect()->route('home')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
         }
     }
@@ -27,12 +35,13 @@ class PostinganController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
     
         if ($user && $user->role === 'admin') {
             // Tindakan yang hanya dapat diakses oleh admin
-            return view('postingan.create', compact('firstname', 'lastname', 'user'));
+            return view('postingan.create', compact('firstname', 'lastname', 'user', 'products'));
         } else {
             // Tindakan ini hanya dapat diakses oleh nonadmin
             return redirect()->route('home')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -43,49 +52,59 @@ class PostinganController extends Controller
     {
         $request->validate([
             'nama_menu' => 'required',
-            'harga' => 'required|regex:/^\d+(\.\d{1,4})?$/',
+            'harga' => 'required|regex:/^\d+(\.\d{1,4})?/',
             'deskripsi' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Aturan validasi untuk gambar
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'jenis' => 'required', // Menambahkan validasi untuk 'jenis'
+            'kapasitas' => 'required|integer', // Menambahkan validasi untuk 'kapasitas'
         ]);
     
         $image = $request->file('image');
-        
+    
         // Berikan nama unik untuk gambar
         $imageName = time() . '.' . $image->getClientOriginalExtension();
     
-        // Simpan gambar ke direktori yang diinginkan
-        $image->move(public_path('storage/images'), $imageName);
+        // Simpan gambar ke direktori yang diinginkan di penyimpanan
+        $image->storeAs('images', $imageName);
     
         // Simpan data postingan ke basis data
         $postingan = new Postingan([
             'nama_menu' => $request->get('nama_menu'),
-            'harga' => $request->get('harga'), // Simpan harga dalam tipe data desimal
+            'harga' => $request->get('harga'),
             'deskripsi' => $request->get('deskripsi'),
-            'image' => $imageName, // Simpan nama gambar dalam basis data
+            'image' => 'storage/images/' . $imageName,
+            'jenis' => $request->get('jenis'), // Menambahkan 'jenis'
+            'kapasitas' => $request->get('kapasitas'), // Menambahkan 'kapasitas'
         ]);
     
         $postingan->save();
     
         return redirect()->route('postingan.index')
             ->with('success', 'Postingan berhasil ditambahkan');
-    }    
+    }
 
     public function show($id, Request $request)
     {
         $postingan = Postingan::find($id);
+        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('postingan.detail', compact('postingan', 'firstname', 'lastname', 'user'));
-    }
-
+        
+        // Ambil jumlah beli dari semua produk yang terkait dengan postingan
+        $jumlahBeli = $postingan->products->sum('jumlah_beli');
+        
+        return view('postingan.detail', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user', 'products'));
+    } 
+     
     public function edit($id, Request $request)
     {
         $postingan = Postingan::find($id);
+        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('postingan.edit', compact('postingan', 'firstname', 'lastname', 'user'));
+        return view('postingan.edit', compact('postingan', 'firstname', 'lastname', 'user', 'products'));
     }
 
     public function update(Request $request, $id)
@@ -94,7 +113,9 @@ class PostinganController extends Controller
             'nama_menu' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Menghapus required untuk gambar
+            'jenis' => 'required', // Menambahkan validasi untuk 'jenis'
+            'kapasitas' => 'integer', // Menambahkan validasi untuk 'kapasitas'
         ]);
     
         // Dapatkan postingan berdasarkan ID
@@ -115,12 +136,14 @@ class PostinganController extends Controller
             // Simpan gambar ke direktori public/storage/images
             $image->move(public_path('storage/images'), $imageName);
     
-            // Update data postingan
+            // Update data postingan termasuk 'jenis' dan 'kapasitas'
             $postingan->update([
                 'nama_menu' => $request->get('nama_menu'),
                 'harga' => $request->get('harga'),
                 'deskripsi' => $request->get('deskripsi'),
                 'image' => 'storage/images/' . $imageName,
+                'jenis' => $request->get('jenis'), // Menambahkan 'jenis'
+                'kapasitas' => $request->get('kapasitas'), // Menambahkan 'kapasitas'
             ]);
         } else {
             // Jika tidak ada gambar yang diunggah, update data lainnya tanpa mengubah gambar
@@ -128,17 +151,26 @@ class PostinganController extends Controller
                 'nama_menu' => $request->get('nama_menu'),
                 'harga' => $request->get('harga'),
                 'deskripsi' => $request->get('deskripsi'),
+                'jenis' => $request->get('jenis'), // Menambahkan 'jenis'
+                'kapasitas' => $request->get('kapasitas'), // Menambahkan 'kapasitas'
             ]);
         }
     
         return redirect()->route('postingan.index')
             ->with('success', 'Postingan berhasil diperbarui');
-    }
+    }    
 
     public function destroy($id)
     {
-        Postingan::find($id)->delete();
-
+        // Ambil postingan terkait
+        $postingan = Postingan::find($id);
+    
+        // Hapus semua produk terkait
+        $postingan->products()->delete();
+    
+        // Hapus postingan
+        $postingan->delete();
+    
         return redirect()->route('postingan.index')
             ->with('success', 'Postingan berhasil dihapus');
     }

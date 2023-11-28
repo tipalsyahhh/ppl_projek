@@ -8,74 +8,160 @@ use App\Models\Postingan;
 use App\Models\Login;
 use App\Models\DataAkun;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
+        $products = [];
+
+        if ($user && $user->role === 'admin') {
+            // Jika pengguna adalah admin, ambil semua produk
+            $products = Product::all();
+        } else {
+            $latestIsNew = Product::where('user_id', $user->id)
+                ->orderBy('is_new', 'desc') // Urutkan berdasarkan is_new secara menurun
+                ->first();
+
+            if ($latestIsNew) {
+                $products = Product::where('user_id', $user->id)
+                    ->where('is_new', $latestIsNew->is_new) // Mencari data dengan is_new yang sama dengan yang terbaru
+                    ->get();
+            }
+        }
+
         return view('products.index', compact('products', 'firstname', 'lastname', 'user'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $postinganId = null)
     {
         $user = Auth::user();
+        $products = Product::all();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
+    
+        // Jika postinganId tidak diberikan, ambil postingan terakhir berdasarkan ID
+        if (!$postinganId) {
+            $postingan = Postingan::latest('id')->first();
+        } else {
+            // Ambil data postingan berdasarkan postinganId
+            $postingan = Postingan::find($postinganId);
+    
+            // Pastikan bahwa postingan dengan postinganId yang diberikan ditemukan
+            if (!$postingan) {
+                return redirect()->route('error')->with('error', 'Postingan tidak ditemukan.');
+            }
+        }
     
         // Ambil data menu dari model Postingan
         $menus = Postingan::all();
     
-        return view('products.create', compact('firstname', 'lastname', 'user', 'menus'));
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'alamat_id' => 'required',
+                'jumlah_beli' => 'required|integer',
+                'tanggal_datang' => 'required|date',
+            ]);
+        
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        
+            // Ambil data postingan berdasarkan menu_id
+            $postingan = Postingan::find($request->input('menu_id'));
+        
+            // Pastikan bahwa postingan dengan menu_id yang diberikan ditemukan
+            if (!$postingan) {
+                return redirect()->back()->with('error', 'Menu tidak ditemukan.');
+            }
+        
+            // Bersihkan nilai harga dari tanda pemisah ribuan dan angka desimal, konversi ke float
+            $hargaCleaned = preg_replace('/[^0-9]/', '', $postingan->harga);
+            $harga = floatval($hargaCleaned);
+        
+            // Buat produk baru
+            $product = new Product;
+            // Hapus baris berikut karena menu_id akan diisi otomatis
+            // $product->menu_id = $request->input('menu_id');
+            $product->user_id = $user->id;
+            $product->alamat_id = $request->input('alamat_id');
+            $product->jumlah_beli = $request->input('jumlah_beli');
+            $product->total_harga = $harga * $request->input('jumlah_beli');
+            $product->created_at = now();
+            $product->tanggal_datang = $request->input('tanggal_datang');
+            $product->status = 'menunggu';
+            $product->is_new = true;
+            $product->save();
+        
+            return redirect()->route('products.index');
+        }
+    
+        return view('products.create', compact('firstname', 'lastname', 'user', 'menus', 'products', 'postingan'));
     }
+    
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'menu_id' => 'required',
-            'jumlah_beli' => 'required',
+            'menu_id' => 'required|exists:postingan,id',
+            'jumlah_beli' => 'required|integer',
+            'tanggal_datang' => 'required|date',
         ]);
     
         $user = Auth::user();
         $data['user_id'] = $user->id;
     
         // Cari data alamat yang sesuai dari model DataAkun berdasarkan user yang sedang login
+        // Cari data alamat yang sesuai dari model DataAkun berdasarkan user yang sedang login
         $dataAkun = DataAkun::where('user_id', $user->id)->first();
-    
+
         if ($dataAkun) {
             // Jika DataAkun ditemukan, ambil alamat_id-nya dan setel pada data produk
             $data['alamat_id'] = $dataAkun->id;
         } else {
-            // Tangani situasi jika DataAkun tidak ditemukan (misalnya, berikan nilai default atau kembalikan kesalahan)
+            // Tangani situasi jika DataAkun tidak ditemukan
+            // Misalnya, berikan nilai default atau arahkan pengguna ke halaman yang sesuai
             // $data['alamat_id'] = nilai_default;
-            // Atau tampilkan pesan kesalahan dan arahkan pengguna ke halaman yang sesuai
-            // return redirect()->route('error')->with('error', 'Data Akun tidak ditemukan');
+            // Atau tampilkan pesan kesalahan
+            return redirect()->route('error')->with('error', 'Data Akun tidak ditemukan');
         }
     
+        // Ambil data harga dari model Postingan
+        $harga = Postingan::where('id', $data['menu_id'])->value('harga');
+    
+        // Hitung total harga
+        $data['total_harga'] = $harga * $data['jumlah_beli'];
+    
+        // Setel is_new untuk menjadi angka yang berurutan
+        $lastIsNew = Product::where('user_id', $user->id)->max('is_new');
+        $data['is_new'] = $lastIsNew ? $lastIsNew + 1 : 1;
+    
+        // Tambahkan properti created_at dengan waktu sekarang
+        $data['created_at'] = now();
+    
+        // Set status menjadi "menunggu"
+        $data['status'] = 'menunggu';
+    
+        // Buat entri produk baru
         Product::create($data);
     
-        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan.');
-    }        
+        return redirect()->route('products.index')->with('success', 'Pesanan berhasil di buat, tunggu admin memferivikasi pesanan anda.');
+    }
+    
 
     public function show($id, Request $request)
     {
         $product = Product::find($id);
+        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('products.index', compact('product', 'firstname', 'lastname', 'user'));
-    }
-
-    public function edit($id, Request $request)
-    {
-        $product = Product::find($id);
-        $user = Auth::user();
-        $firstname = $request['first_name'];
-        $lastname = $request['last_name'];
-        return view('products.edit', compact('product'));
+        return view('products.index', compact('product', 'firstname', 'lastname', 'user', 'products'));
     }
 
     public function update(Request $request, $id)
@@ -99,5 +185,42 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');
+    }
+
+    public function tataTertib(Request $request)
+    {
+        $user = Auth::user();
+        $products = Product::all();
+        $firstname = $request['first_name'];
+        $lastname = $request['last_name'];
+        return view('products.peraturan', compact('firstname', 'lastname', 'user', 'products'));
+    }
+
+    public function approveOrder(Request $request)
+    {
+        // Validasi request, pastikan product_id ada dalam request
+        $request->validate([
+            'product_id' => 'required|exists:product,id',
+        ]);
+
+        // Temukan produk berdasarkan ID dan langsung ubah status menjadi disetujui
+        Product::where('id', $request->product_id)->update(['status' => 'disetujui']);
+
+        // Redirect ke halaman products.index setelah berhasil disetujui
+        return redirect()->route('products.index')->with('success', 'Status berhasil diubah menjadi disetujui');
+    }
+
+    public function rejectOrder(Request $request)
+    {
+        // Validasi request, pastikan product_id ada dalam request
+        $request->validate([
+            'product_id' => 'required|exists:product,id',
+        ]);
+
+        // Temukan produk berdasarkan ID dan langsung ubah status menjadi ditolak
+        Product::where('id', $request->product_id)->update(['status' => 'ditolak']);
+
+        // Redirect ke halaman products.index setelah berhasil ditolak
+        return redirect()->route('products.index')->with('success', 'Status berhasil diubah menjadi ditolak');
     }
 }

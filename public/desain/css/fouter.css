@@ -1,0 +1,92 @@
+#content {
+    height: 100vh;
+    /* Membuat tinggi elemen menjadi 100% dari tinggi tampilan */
+    /* Anda dapat menyesuaikan properti lain sesuai kebutuhan */
+}
+
+.user-admin {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: #3d3d3db6;
+    /* Ganti dengan warna latar belakang yang diinginkan */
+    padding: 10px 10px 10px 10px;
+    z-index: 999;
+    /* Pastikan z-index lebih tinggi dari elemen lainnya */
+    border-radius: 0 50% 50% 0;
+    /* Membuat tampilan bulat setengah di sisi kiri */
+}
+
+.fouter-user {
+    background-color: #fff;
+    /* Ganti warna latar belakang sesuai kebutuhan */
+    padding: 20px 0;
+    /* Sesuaikan padding sesuai kebutuhan */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Membuat lebar 100% agar melintasi seluruh lebar layar */
+    border-top: 1px solid #929292;
+    /* Tambahkan border di bagian atas dengan warna sesuai kebutuhan */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.isi-menu {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    /* Sesuaikan padding antar ikon sesuai kebutuhan */
+    position: relative;
+}
+
+.isi-icon {
+    margin-right: 35px;
+    margin-left: 20px;
+    /* Sesuaikan margin antar menu sesuai kebutuhan */
+    text-decoration: none;
+    color: black;
+    font-size: 1.2em;
+}
+
+/* Optional: Jika ingin menambahkan style ikon Bootstrap */
+.isi-icon i {
+    transition: color 0.3s;
+}
+
+.isi-icon:hover i {
+    color: #007bff;
+    /* Ganti warna hover sesuai kebutuhan */
+}
+
+@media (max-width: 768px) {
+#nav-like,
+#nav-welcome,
+#nav-status,
+#nav-follow {
+display: none;
+}
+
+.fouter-user {
+display: block;
+}
+}
+
+/* Untuk menampilkan elemen dengan ID pada ukuran layar > 768px */
+@media (min-width: 769px) {
+#nav-like,
+#nav-welcome,
+#nav-status,
+#nav-follow {
+display: block;
+}
+
+.fouter-user {
+display: none;
+}
+}

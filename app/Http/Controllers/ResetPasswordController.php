@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class ResetPasswordController extends BaseController
 {
     public function showResetForm($username, Request $request)
     {
+        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
-        return view('akun.reset-password-form', ['username' => $username], compact('firstname', 'lastname', 'user'));
+        return view('akun.reset-password-form', ['username' => $username], compact('firstname', 'lastname', 'user', 'products'));
     }
 
     public function resetPassword(Request $request)
     {
+        $products = Product::all();
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
@@ -41,6 +44,6 @@ class ResetPasswordController extends BaseController
         $username = $user->username;
 
         session()->flash('success', 'Password berhasil diubah. Silahkan login dengan password baru.');
-        return view('akun.reset-password-form', compact('username', 'firstname', 'lastname', 'user'));
+        return view('akun.reset-password-form', compact('username', 'firstname', 'lastname', 'user', 'products'));
     }
 }

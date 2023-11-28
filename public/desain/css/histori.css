@@ -1,0 +1,69 @@
+    .container-history {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .alert {
+        margin-bottom: 20px;
+    }
+
+    .cart-histori {
+        border: none;
+        overflow: hidden;
+    }
+
+    .header-history {
+        background-color: #52b3d9;
+        /* Warna latar belakang */
+        padding: 10px;
+        /* Ruang padding di sekitar teks */
+        text-align: left;
+        /* Posisi teks ke tengah */
+        border-bottom: 1px solid #ddd;
+        /* Garis bawah */
+    }
+
+    .header-history h1 {
+        font-size: 20px;
+        margin: 0;
+        /* Menghapus margin pada h1 */
+        color: #fff;
+        /* Warna teks */
+    }
+
+    .isi-histori {}
+
+    .text-histori {
+        padding: 10px;
+        border-bottom: 1px solid #ddd; /* Garis batas hanya di bagian bawah dengan warna abu-abu */
+        transition: background-color 0.3s;
+    }
+
+    .text-histori:hover {
+        background-color: #e0e0e0;
+        /* Warna latar belakang saat hover */
+        cursor: pointer;
+        /* Mengubah kursor menjadi tanda tangan saat hover */
+    }
+
+    .text-histori p {
+        margin: 0;
+        font-size: 10px;
+        color: #080808;
+    }
+
+    .text-histori p:last-child {
+        text-align: right;
+        /* Menempatkan teks pada ujung kanan */
+    }
+
+    p.text-menu {
+        margin-right: 20px;
+        font-size: 20px;
+    }

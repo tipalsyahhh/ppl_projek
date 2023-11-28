@@ -10,7 +10,7 @@
 <form method="post" action="{{ route('postingan.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-        <label>Nama Menu</label>
+        <label>Nama</label>
         <input type="text" name="nama_menu" value="{{ old('nama_menu') }}" class="form-control">
     </div>
 
@@ -33,6 +33,24 @@
     </div>
 
     @error('deskripsi')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
+    <div class="form-group">
+        <label>Jenis</label>
+        <input type="text" name="jenis" value="{{ old('jenis') }}" class="form-control">
+    </div>
+
+    @error('jenis')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
+    <div class="form-group">
+        <label>Kapasitas</label>
+        <input type="text" name="kapasitas" value="{{ old('kapasitas') }}" class="form-control">
+    </div>
+
+    @error('kapasitas')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 

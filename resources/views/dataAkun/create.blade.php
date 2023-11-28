@@ -28,6 +28,11 @@
         </div>
 
         <div class="form-group">
+            <label>Biodata</label>
+            <input type="text" name="biodata" value="{{ old('biodata') }}" class="form-control">
+        </div>
+
+        <div class="form-group">
             <label>Gender</label>
             <select name="gender" class="form-control">
                 <option disabled selected>Pilih Gender</option>
