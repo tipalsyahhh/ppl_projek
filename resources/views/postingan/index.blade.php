@@ -24,6 +24,7 @@
 @endpush
 
 @section('content')
+<<<<<<< HEAD
 <a class="btn btn-primary mb-3" href="{{ route('postingan.create') }}"><i class="bi bi-plus"></i> Tambah Data</a>
 @if (session('success'))
 <div id="success-alert" class="alert alert-primary">
@@ -86,6 +87,54 @@
         </table>
     </div>
 </div>
+=======
+    <a class="btn btn-primary mb-3" href="{{ route('postingan.create') }}"><i class="bi bi-plus"></i> Tambah Data</a>
+    @if (session('success'))
+        <div id="success-alert" class="alert alert-primary">
+            {{ session('success') }}
+        </div>
+    @endif
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Jumlah Terjual</th>
+                <th scope="col">Images</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse ($postingan as $post)
+            <tr>
+                <td>{{ $post->id }}</td>
+                <td>{{ $post->nama_menu }}</td>
+                <td>{{ $post->harga }}</td>
+                <td>{{ $post->deskripsi }}</td>
+                <td>{{ $jumlahBeli[$post->id] }}</td>
+                <td><img class="profile-image" src="{{ asset('' . $post->image) }}" alt="Gambar Postingan"></td>
+                <td>
+                    <a href="{{ route('postingan.edit', ['id' => $post->id]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
+                    <form action="{{ route('postingan.destroy', ['id' => $post->id]) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary btn-sm btn-delete" data-id="{{ $post->id }}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5"><h2>Data tidak ada</h2></td>
+            </tr>
+        @endforelse
+
+        </tbody>
+    </table>
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 @endsection
 @push('script')
 <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>

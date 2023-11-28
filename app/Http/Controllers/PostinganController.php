@@ -25,7 +25,11 @@ class PostinganController extends Controller
                 $jumlahBeli[$item->id] = $item->products->sum('jumlah_beli');
             }
     
+<<<<<<< HEAD
             return view('postingan.index', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user', 'products'));
+=======
+            return view('postingan.index', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         } else {
             // Tindakan ini hanya dapat diakses oleh non-admin
             return redirect()->route('home')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
@@ -55,8 +59,11 @@ class PostinganController extends Controller
             'harga' => 'required|regex:/^\d+(\.\d{1,4})?/',
             'deskripsi' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+<<<<<<< HEAD
             'jenis' => 'required', // Menambahkan validasi untuk 'jenis'
             'kapasitas' => 'required|integer', // Menambahkan validasi untuk 'kapasitas'
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         ]);
     
         $image = $request->file('image');
@@ -73,8 +80,11 @@ class PostinganController extends Controller
             'harga' => $request->get('harga'),
             'deskripsi' => $request->get('deskripsi'),
             'image' => 'storage/images/' . $imageName,
+<<<<<<< HEAD
             'jenis' => $request->get('jenis'), // Menambahkan 'jenis'
             'kapasitas' => $request->get('kapasitas'), // Menambahkan 'kapasitas'
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         ]);
     
         $postingan->save();
@@ -94,7 +104,11 @@ class PostinganController extends Controller
         // Ambil jumlah beli dari semua produk yang terkait dengan postingan
         $jumlahBeli = $postingan->products->sum('jumlah_beli');
         
+<<<<<<< HEAD
         return view('postingan.detail', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user', 'products'));
+=======
+        return view('postingan.detail', compact('postingan', 'jumlahBeli', 'firstname', 'lastname', 'user'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     } 
      
     public function edit($id, Request $request)

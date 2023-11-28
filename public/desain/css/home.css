@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 20px;
@@ -447,3 +448,258 @@ footer .layar-dalam .copyright {
   width: 100%;
   height: auto;
 }
+=======
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* Latar belakang putih */
+        }
+
+        .name {
+            display: flex;
+            flex-direction: row;
+            font-size: 2em;
+            padding: 15px;
+            padding-top: 5px;
+            text-transform: capitalize;
+            text-shadow: 4px 4px 13px rgba(0,0,0,0.61);
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .firstname {
+            color: white;
+            font-weight: 700;
+        }
+
+        .lastname {
+            color: crimson;
+            padding-left: 4px;
+        }
+
+        header {
+            z-index: 99999;
+            background-color: #091426; /* Latar belakang transparan */
+            height: 45px;
+            padding: 10px;
+            position: fixed;
+            display: flex;
+            width: 100%;
+
+        }
+        header li img {
+        z-index: 99999;
+        position: absolute;
+        top: 25px;
+        right: 80px;
+        width: 90px;
+        height: 50px;
+        margin-top: -20px;
+        /* border-radius: 50px; */
+        }
+
+        header li img:hover {
+            width: 95px;
+            height: 55px;
+            transition: all .3s ease-in-out;
+        }
+
+        header ul {
+            list-style-type: none;
+            display: flex;
+            flex: 1; /* Tombol akan memenuhi ruang yang tersedia */
+            justify-content: center; /* Meletakkan tombol di tengah navbar */
+        }
+        header ul li {
+            margin-left: 10px; /* Menyusun tombol menu dengan margin yang lebih kecil */
+            font-weight: 500;
+            
+        }
+        header ul li:first-child {
+            margin-left: 0px; /* Hapus margin kiri untuk item pertama */
+        }
+        header ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding-right: 20px;
+            font-size: 25px;
+            font-family: 'Bebas Neue', sans-serif;
+            
+        }
+        header ul li a:hover {
+            transition: all .4s ease-in-out;
+            color: crimson;
+            text-shadow: 4px 4px 13px rgba(0,0,0,0.61);
+        }
+
+        .image {
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            height: 100vh;
+            text-shadow: 4px 4px 13px rgba(0,0,0,0.61);
+            font-family: 'Dancing Script', cursive;
+            font-size: 30px;
+        }
+
+        .image > p {
+            font-size: 10px;
+        }
+        
+        .image > h1 {
+            margin: 0;
+        }
+        
+        .container {
+            padding: 100px 0;
+            text-align: center;
+        }
+        .box {
+            width: 800px;
+            margin: 0 auto; /* Menjadikan margin otomatis di sisi kiri dan kanan */
+            display: flex;
+            flex-direction: column; /* Tata letak vertikal */
+            justify-content: center; /* Meletakkan konten di tengah secara vertikal */
+            align-items: center; /* Meletakkan konten di tengah secara horizontal */
+        }
+        .box span {
+            align-self: flex-start;
+            color: #091426;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .box p{
+            text-align: justify;
+        }
+
+        footer{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            height: auto;
+            width: 100%;
+            font-family: "Open Sans";
+            padding-top: 40px;
+            color: #fff;
+        }
+        
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-content h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            text-transform: capitalize;
+            line-height: 3rem;
+        }
+        
+        .footer-content p {
+            max-width: 500px;
+            margin: 10px auto;
+            line-height: 28px;
+            font-size: 14px;
+        }
+        
+        .socials {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0 3rem 0;
+        }
+        
+        .socials li {
+            margin: 0 10px;
+        }
+        
+        .socials a {
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .socials a i {
+            font-size: 1.1rem;
+            transition: color .4s ease;
+        }
+        .socials a:hover i{
+            color: aqua;
+        }
+        
+        .footer-bottom {
+            background: #000;
+            width: 100vw;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 14px;
+            word-spacing: 2px;
+            text-transform: capitalize;
+        }
+        
+        .footer-bottom span {
+            text-transform: uppercase;
+            opacity: .4;
+            font-weight: 200;
+        }
+
+        form {
+            width: 300px; /* Lebar form */
+            margin: 0 auto; /* Meletakkan form di tengah halaman */
+            justify-content: right; /* Meletakkan elemen dalam form-group di pojok kanan */
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex; /* Menggunakan flexbox */
+            align-items: center;
+            width: 600px;
+            position: relative;
+            left: 50%;
+        }
+
+        label {
+            width: 350px; /* Lebar label */
+            margin-left: auto;
+            font-size: 22px;
+            font-weight: bold;
+            margin-left: 5px;
+            color: #efef60;
+        }
+
+        select {
+            flex: 1; /* Mengisi sisa ruang dengan elemen select */
+            padding: 10px; /* Menambahkan padding untuk tampilan yang lebih besar */
+            font-size: 16px; /* Mengatur ukuran teks pada select */
+            border-radius: 10px;
+        }
+
+        @media screen and (max-width:960px) {
+            .header {
+                position: inherit;
+            }
+            
+            .image {
+                max-width: 140%;
+		margin:0 0 25px -5%;
+		min-width: 140%;
+            }
+        }
+
+        @media (max-aspect-ratio: 16/9) {
+            .image {
+              width: 100%;
+              height: auto;
+            }
+          }
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7

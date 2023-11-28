@@ -24,7 +24,12 @@
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="{{ route('from_input') }}">Gallery</a></li>
                 <li><a href="{{ route('register') }}">Daftar</a></li>
+<<<<<<< HEAD
                 <li><a href="{{ route('login') }}">Login</a></li>   
+=======
+                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><img src="{{ asset('img/logo2.png') }}" alt=""></li>        
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
             </ul>
         </nav>
     </header>

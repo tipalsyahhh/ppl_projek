@@ -20,7 +20,11 @@ class Status extends Model
 
     public function likes()
     {
+<<<<<<< HEAD
         return $this->hasMany(Likes::class, 'status_id', 'id');
+=======
+        return $this->hasMany(Likes::class, 'status_id', 'id')->where('like', 1);
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     }
     
     public function comments()

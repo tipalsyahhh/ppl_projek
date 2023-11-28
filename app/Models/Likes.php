@@ -37,6 +37,7 @@ class Likes extends Model
             'comentar' => 1,
         ]);
     }
+<<<<<<< HEAD
 
     public static function waktuComment($user_id, $commentText)
 {
@@ -46,4 +47,6 @@ class Likes extends Model
         'created_at' => now(), // Tambahkan created_at di sini
     ]);
 }
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 }

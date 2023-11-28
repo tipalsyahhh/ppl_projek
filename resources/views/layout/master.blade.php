@@ -36,9 +36,29 @@
 
     <!-- Main Content -->
 
+<<<<<<< HEAD
     <!-- Topbar -->
     @include('partial.nav')
     <!-- End of Topbar -->
+=======
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">@yield('judul')</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">@yield('tabel')</h6>
+                        </div>
+                        <div class="card-body">
+                            @yield('content')
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                    </div>
+                </div>
+            <!-- End of Main Content -->
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 
     <!-- Begin Page Content -->
     @if ($user && $user->role === 'admin')

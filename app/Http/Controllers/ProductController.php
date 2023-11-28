@@ -19,7 +19,11 @@ class ProductController extends Controller
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
         $products = [];
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         if ($user && $user->role === 'admin') {
             // Jika pengguna adalah admin, ambil semua produk
             $products = Product::all();
@@ -27,18 +31,30 @@ class ProductController extends Controller
             $latestIsNew = Product::where('user_id', $user->id)
                 ->orderBy('is_new', 'desc') // Urutkan berdasarkan is_new secara menurun
                 ->first();
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
             if ($latestIsNew) {
                 $products = Product::where('user_id', $user->id)
                     ->where('is_new', $latestIsNew->is_new) // Mencari data dengan is_new yang sama dengan yang terbaru
                     ->get();
             }
         }
+<<<<<<< HEAD
 
         return view('products.index', compact('products', 'firstname', 'lastname', 'user'));
     }
 
     public function create(Request $request, $postinganId = null)
+=======
+    
+        return view('products.index', compact('products', 'firstname', 'lastname', 'user'));
+    }    
+     
+    public function create(Request $request)
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     {
         $user = Auth::user();
         $products = Product::all();
@@ -62,6 +78,7 @@ class ProductController extends Controller
         $menus = Postingan::all();
     
         if ($request->isMethod('post')) {
+<<<<<<< HEAD
             $validator = Validator::make($request->all(), [
                 'alamat_id' => 'required',
                 'jumlah_beli' => 'required|integer',
@@ -102,6 +119,29 @@ class ProductController extends Controller
         }
     
         return view('products.create', compact('firstname', 'lastname', 'user', 'menus', 'products', 'postingan'));
+=======
+            // Validasi data yang dikirim dari formulir (pastikan validasi sesuai kebutuhan Anda)
+    
+            $menuId = $request->input('menu_id');
+            $alamatId = $request->input('alamat_id');
+            $jumlahBeli = $request->input('jumlah_beli');
+    
+            // Buat entri produk baru
+            $product = new Product;
+            $product->menu_id = $menuId;
+            $product->user_id = $user->id;
+            $product->alamat_id = $alamatId;
+            $product->jumlah_beli = $jumlahBeli;
+            $product->created_at = now();
+            $product->is_new = true; // Mengatur is_new menjadi true
+            $product->save();
+    
+            // Redirect ke halaman yang sesuai setelah membuat produk
+            return redirect()->route('products.index');
+        }
+    
+        return view('products.create', compact('firstname', 'lastname', 'user', 'menus'));
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     }
     
 
@@ -131,12 +171,15 @@ class ProductController extends Controller
             return redirect()->route('error')->with('error', 'Data Akun tidak ditemukan');
         }
     
+<<<<<<< HEAD
         // Ambil data harga dari model Postingan
         $harga = Postingan::where('id', $data['menu_id'])->value('harga');
     
         // Hitung total harga
         $data['total_harga'] = $harga * $data['jumlah_beli'];
     
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         // Setel is_new untuk menjadi angka yang berurutan
         $lastIsNew = Product::where('user_id', $user->id)->max('is_new');
         $data['is_new'] = $lastIsNew ? $lastIsNew + 1 : 1;
@@ -144,6 +187,7 @@ class ProductController extends Controller
         // Tambahkan properti created_at dengan waktu sekarang
         $data['created_at'] = now();
     
+<<<<<<< HEAD
         // Set status menjadi "menunggu"
         $data['status'] = 'menunggu';
     
@@ -151,6 +195,12 @@ class ProductController extends Controller
         Product::create($data);
     
         return redirect()->route('products.index')->with('success', 'Pesanan berhasil di buat, tunggu admin memferivikasi pesanan anda.');
+=======
+        // Buat entri produk baru
+        Product::create($data);
+    
+        return redirect()->route('products.index')->with('success', 'Produk berhasil ditambahkan.');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     }
     
 
@@ -161,7 +211,24 @@ class ProductController extends Controller
         $user = Auth::user();
         $firstname = $request['first_name'];
         $lastname = $request['last_name'];
+<<<<<<< HEAD
         return view('products.index', compact('product', 'firstname', 'lastname', 'user', 'products'));
+=======
+        return view('products.index', compact('product', 'firstname', 'lastname', 'user'));
+    }
+
+    public function cekOrder(Product $product)
+    {
+        // Ambil data pembeli dari produk
+        $login = $product->pembeli;
+    
+        // Kirim notifikasi kepada pembeli
+        $login->notify(new OrderChecked($product));
+    
+        // Tambahkan log atau tindakan lain yang diperlukan
+    
+        return redirect()->back()->with('success', 'Notifikasi telah dikirim kepada pembeli.');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     }
 
     public function update(Request $request, $id)

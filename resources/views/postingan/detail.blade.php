@@ -1,9 +1,49 @@
 @extends('layout.master')
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{ asset('desain/css/detail.css')}}">
 
 @section('content')
 @section('tabel')
 Detail Postingan
+=======
+
+<style>
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .card-body {
+        text-align: left;
+        width: 100%;
+    }
+
+    .card-title {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .card-text {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+@section('content')
+@section('tabel')
+    Pesan Sekarang
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 @endsection
 <div class="card1">
     <div class="card-body">
@@ -39,6 +79,7 @@ Detail Postingan
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="btn-detail">
             <a href="{{ route('pages.welcome') }}" class="btn btn-warning"><i class="bi bi-arrow-return-left"></i>
                 Kembali</a>
@@ -50,6 +91,18 @@ Detail Postingan
             <img src="{{ asset('storage/kedu.png') }}" alt="Deskripsi Gambar">
             <p style="color:#080808;">kedu warna</p>
             <p>Keamanan terjamin</p>
+=======
+        <div class="card-body">
+            <h5 class="card-title">{{ $postingan->nama_menu }}</h5>
+            <p class="card-text">Harga: Rp {{ $postingan->harga }}</p>
+            <p class="card-text">Deskripsi: {{ $postingan->deskripsi }}</p>
+            <p>Terjual : {{ $jumlahBeli }}</p>
+            
+            <!-- Tampilkan gambar dengan menggunakan tag <img> -->
+            <img src="{{ asset($postingan->image) }}" alt="Gambar Postingan" width="300" height="200">
+            
+            <!-- Tambahkan elemen HTML lainnya sesuai kebutuhan -->
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
         </div>
     </div>
 </div>

@@ -1,5 +1,16 @@
 @extends('layout.master')
 
+<<<<<<< HEAD
+=======
+@section('judul')
+    Daftar Status
+@endsection
+
+@section('tabel')
+    Data Status
+@endsection
+
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 @push('style')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css" rel="stylesheet">
@@ -9,6 +20,7 @@
             width: 100px;
             height: 50px;
         }
+<<<<<<< HEAD
 
         .button-postingan {
             display: flex;
@@ -18,17 +30,23 @@
         .button-delete-postingan {
             margin-left: 10px;
         }
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     </style>
 @endpush
 
 @section('content')
     <a class="btn btn-primary mb-3" href="{{ route('statuses.create') }}"><i class="bi bi-plus"></i> Tambah Status</a>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
     @if (session('success'))
         <div id="success-alert" class="alert alert-primary">
             {{ session('success') }}
         </div>
     @endif
+<<<<<<< HEAD
 
     <div class="card-body">
         <div class="table-responsive">
@@ -82,16 +100,66 @@
             </table>
         </div>
     </div>
+=======
+    <table class="table" id="dataTable">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">User</th>
+                <th scope="col">Caption</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse ($statuses as $status)
+            <tr>
+                <td>{{ $status->id }}</td>
+                <td>
+                    @if ($status->user)
+                        {{ $status->user->user }}
+                    @else
+                        User Tidak Ditemukan
+                    @endif
+                </td>
+                <td>{{ $status->caption }}</td>
+                <td><img class="profile-image" src="{{ asset('' . $status->image) }}" alt="Status Image"></td>
+                <td>
+                    <a href="{{ route('statuses.edit', ['status' => $status]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></a>
+                    <form action="{{ route('statuses.destroy', ['status' => $status]) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-primary btn-sm btn-delete" data-id="{{ $status->id }}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="5"><h2>Data tidak ada</h2></td>
+            </tr>
+        @endforelse
+        </tbody>
+    </table>
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
 @endsection
 
 @push('script')
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+<<<<<<< HEAD
         $(document).ready(function () {
             $('#dataTable').DataTable();
 
             const deleteButtons = document.querySelectorAll('.button-delete-postingan button');
+=======
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -110,7 +178,11 @@
                             const form = document.createElement('form');
                             form.method = 'POST';
                             form.style.display = 'none';
+<<<<<<< HEAD
                             form.action = '/statuses/' + itemId;
+=======
+                            form.action = form.action = '/statuses/' + itemId;
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
                             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                             const csrfInput = document.createElement('input');
                             csrfInput.name = '_token';
@@ -136,7 +208,11 @@
         // Cek apakah elemen pesan ada
         if (successAlert) {
             // Setelah 10 detik, sembunyikan elemen pesan
+<<<<<<< HEAD
             setTimeout(function () {
+=======
+            setTimeout(function() {
+>>>>>>> 6b3ee88ae04a4dd741cc8fe068843f3c9ab397a7
                 successAlert.style.display = 'none';
             }, 10000); // 10 detik
         }
